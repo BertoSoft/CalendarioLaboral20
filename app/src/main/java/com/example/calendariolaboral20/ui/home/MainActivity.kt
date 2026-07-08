@@ -1,4 +1,4 @@
-package com.example.calendariolaboral20.home
+package com.example.calendariolaboral20.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
