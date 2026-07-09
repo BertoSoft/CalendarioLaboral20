@@ -56,9 +56,11 @@ class FuncHome {
         )
 
         //
-        // Iniciamos la tabla VacasPendientes
+        // Iniciamos la tabla VacasPendientes, si no esta iniciada
         //
-
+        if(FuncVacasPendientes().isVacasPendientesVacia(miContexto)){
+            FuncVacasPendientes().initVacasPendientes(miContexto)
+        }
 
 
         // aqui debemos de rellenar la tabla VacasPendientes, pero desde 2022 con 9 Días
@@ -70,7 +72,7 @@ class FuncHome {
 
 
 
-        return  false
+        return  respuestaDatoRegistro
     }
 
     fun setDatoRegistro(miContexto: Context, miDato: DatosRegistro): Boolean {
@@ -138,13 +140,14 @@ class FuncHome {
         val adminDb = AdminDb(miContexto, null)
         val sqlReadDb = adminDb.readableDatabase
         val cRegistro = sqlReadDb.rawQuery("SELECT *FROM Registro", null)
-        var i = 0
 
         if (cRegistro.moveToFirst()) {
             while (!cRegistro.isAfterLast) {
+                val colId = cRegistro.getColumnIndex("_id")
                 val colDia = cRegistro.getColumnIndex("Dia")
                 val colHora = cRegistro.getColumnIndex("Hora")
-                if (id == i) {
+
+                if (id == cRegistro.getInt(colId)) {
                     datoRegistro.strDia = cRegistro.getString(colDia)
                     datoRegistro.strHora = cRegistro.getString(colHora)
                     cRegistro.moveToLast()

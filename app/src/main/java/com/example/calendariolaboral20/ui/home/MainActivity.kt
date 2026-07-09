@@ -77,14 +77,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //
-        // Iniciamos la Base de Datos
-        //
-        initBd()
-    }
-
-    private fun initBd() {
-
     }
 
     private fun closeApp(iError: Int) {
