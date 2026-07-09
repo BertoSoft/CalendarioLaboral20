@@ -104,7 +104,7 @@ class FuncHome {
         return false
     }
 
-    private fun getIdRegistroByDato(miContexto: Context, miDato: DatosRegistro): Int {
+    fun getIdRegistroByDato(miContexto: Context, miDato: DatosRegistro): Int {
         var id = -1
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase

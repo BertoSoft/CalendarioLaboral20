@@ -76,10 +76,25 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        //
+        // Iniciamos la Base de Datos
+        //
+        initBd()
+    }
+
+    private fun initBd() {
+
     }
 
     private fun closeApp(iError: Int) {
-        val i = 0
+        if(iError < 0){
+            Toast.makeText(
+                this,
+                "Se produjo un error crítico, se cierra la App...",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         finish()
     }
 
