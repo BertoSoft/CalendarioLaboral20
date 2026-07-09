@@ -38,7 +38,7 @@ class FuncHome {
         //
         // Hacemos una consulta para que se creen todas las tablas
         //
-        val datosRegistro = getDatoRegistroById(miContexto, 0)
+        val datoCeroRegistro = getDatoRegistroById(miContexto, 0)
 
         //
         // Registramos el inicio de la App
@@ -47,7 +47,7 @@ class FuncHome {
         val strFecha = FuncAux().strFechaCortaToCalendar(calFecha)
         val strHora = FuncAux().strHoraToCalendar(calFecha)
 
-        val respuestaDatoRegistro = setDatoRegistro(
+        val isSetRegistro = setDatoRegistro(
             miContexto,
             DatosRegistro(
                 strFecha,
@@ -61,18 +61,16 @@ class FuncHome {
         if(FuncVacasPendientes().isVacasPendientesVacia(miContexto)){
             FuncVacasPendientes().initVacasPendientes(miContexto)
         }
+        //
+        //Si se grabo el registro sin problemas devolvemos true
+        //
 
-
-        // aqui debemos de rellenar la tabla VacasPendientes, pero desde 2022 con 9 Días
-
-
-
-
-
-
-
-
-        return  respuestaDatoRegistro
+        if(isSetRegistro){
+            return true
+        }
+        else{
+            return false
+        }
     }
 
     fun setDatoRegistro(miContexto: Context, miDato: DatosRegistro): Boolean {

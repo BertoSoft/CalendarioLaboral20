@@ -81,8 +81,8 @@ class FuncVacasPendientes {
         // El Registro de ese año ya existe
         //
         else{
-            strSql = "UPDATE VacasPendientes SET Dia = '" +
-                    "${miDato.strYear}', Hora = '" +
+            strSql = "UPDATE VacasPendientes SET Year = '" +
+                    "${miDato.strYear}', Dias = '" +
                     "${miDato.strDias}' WHERE _id = ${id};"
         }
 
