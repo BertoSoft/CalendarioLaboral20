@@ -135,6 +135,11 @@ class Festivos : AppCompatActivity() {
 
     fun guardarDatos() {
         var res = false
+
+        val datoFestivo = DatosFestivos(
+            binding.tvFecha.text.toString(),
+            binding.spFestivo.selectedItem.toString()
+        )
         //
         // Si son vacaciones llamo setVacaciones, si es otro setFestivo
         //
@@ -150,11 +155,8 @@ class Festivos : AppCompatActivity() {
 
             res = FuncFestivos().setFestivo(
                 this,
-                DatosFestivos(
-                    binding.tvFecha.text.toString(),
-                    binding.spFestivo.selectedItem.toString()
+                datoFestivo
                 )
-            )
         }
 
         //
