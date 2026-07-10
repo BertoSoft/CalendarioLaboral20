@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.view.isVisible
 import com.example.calendariolaboral20.R
+import com.example.calendariolaboral20.data.models.DatosFestivos
 import com.example.calendariolaboral20.databinding.ActivityFestivosBinding
 import com.example.calendariolaboral20.domain.FuncAux
+import com.example.calendariolaboral20.domain.FuncFestivos
 import java.util.Calendar
 
 private lateinit var binding: ActivityFestivosBinding
@@ -49,7 +51,7 @@ class Festivos : AppCompatActivity() {
             }
 
         //
-        // ivNuevo
+        // Se pulsa ivNuevo
         //
         binding.ivNuevo.setOnClickListener {
             limpiaControles()
@@ -97,6 +99,71 @@ class Festivos : AppCompatActivity() {
             }
 
         }
+
+        //
+        // Se pulsa en tvFecha
+        //
+        binding.tvFecha.setOnClickListener {
+
+            //
+            // Si pinchamos en tvFecha, lanzamos el dialogo de selector de fecha
+            //
+            if(binding.tvFecha.text != ""){
+                DatePickerDialog(
+                    binding.tvFecha.context,
+                    setFechaListener,
+                    calFecha.get(Calendar.YEAR),
+                    calFecha.get(Calendar.MONTH),
+                    calFecha.get(Calendar.DAY_OF_MONTH)
+                ).show()
+
+            }
+        }
+
+        //
+        // Se pulsa en btnGuardar
+        //
+        binding.btnGuardar.setOnClickListener {
+            if(binding.tvFecha.text != "" && binding.spFestivo.selectedItem != 0){
+                guardarDatos()
+                limpiaControles()
+                desactivaControles()
+                binding.ivEliminar.isVisible = false
+            }
+        }
+    }
+
+    fun guardarDatos() {
+        var res = false
+        //
+        // Si son vacaciones llamo setVacaciones, si es otro setFestivo
+        //
+        if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
+
+            //
+            // Llammamos setVacaciones
+            //
+
+
+        }
+        else{
+
+            res = FuncFestivos().setFestivo(
+                this,
+                DatosFestivos(
+                    binding.tvFecha.text.toString(),
+                    binding.spFestivo.selectedItem.toString()
+                )
+            )
+        }
+
+        //
+        // Segun resultado de res informamos como ha ido la grabacion del dato
+        //
+
+
+
+
 
 
     }
