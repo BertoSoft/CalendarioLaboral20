@@ -1,16 +1,20 @@
 package com.example.calendariolaboral20.ui.festivos
 
-import android.icu.util.Calendar
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.widget.Adapter
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.view.isVisible
 import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.databinding.ActivityFestivosBinding
+import com.example.calendariolaboral20.domain.FuncAux
+import java.util.Calendar
 
 private lateinit var binding: ActivityFestivosBinding
-
+private var calFecha = Calendar.getInstance()
 
 class Festivos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +37,70 @@ class Festivos : AppCompatActivity() {
 
     private fun initListeners() {
 
+        //
+        // Establece la nueva fecha que devuelve DatePicker
+        //
+        val setFechaListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                calFecha.set(Calendar.YEAR, year)
+                calFecha.set(Calendar.MONTH, monthOfYear)
+                calFecha.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                binding.tvFecha.text = FuncAux().strFechaCortaToCalendar(calFecha)
+            }
+
+        //
+        // ivNuevo
+        //
+        binding.ivNuevo.setOnClickListener {
+            limpiaControles()
+            activaControles()
+            binding.ivEliminar.isVisible = false
+            binding.spFestivo.performClick()
+        }
+
+        //
+        // Cambio seleccion spFestivos
+        //
+        binding.spFestivo.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long
+            ) {
+
+                //
+                // Se ha hecho una seleccion, si ivEliminar esta invisible, lanzamos el selector de fechas
+                //
+                if(p2 != 0 && !binding.ivEliminar.isVisible){
+
+                    //
+                    // Lanzamos el datepicker
+                    //
+                    binding.tvFecha.text = FuncAux().strFechaCortaToCalendar(calFecha)
+                    DatePickerDialog(
+                        binding.spFestivo.context,
+                        setFechaListener,
+                        calFecha.get(Calendar.YEAR),
+                        calFecha.get(Calendar.MONTH),
+                        calFecha.get(Calendar.DAY_OF_MONTH)
+                    ).show()
+                    activaControles()
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                //
+                // No se ha seleccionado nada
+                //
+            }
+
+        }
+
+
     }
+
 
     private fun initRv() {
 

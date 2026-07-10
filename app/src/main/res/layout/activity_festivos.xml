@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvDescripcion1" />
 
         <ImageView
-            android:id="@+id/ivSumar"
+            android:id="@+id/ivNuevo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -72,7 +73,7 @@
             android:layout_marginEnd="10dp"
             android:background="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivSumar" />
+            app:layout_constraintTop_toBottomOf="@id/ivNuevo" />
 
         <Spinner
             android:id="@+id/spFestivo"
@@ -83,7 +84,7 @@
             android:layout_marginTop="11dp"
             android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivSumar" />
+            app:layout_constraintTop_toBottomOf="@id/ivNuevo" />
 
         <TextView
             android:id="@+id/tvFecha"

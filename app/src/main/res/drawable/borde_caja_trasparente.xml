@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo transparente o el color que prefieras -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- Ancho y color del borde del resaltado -->
+    <stroke
+        android:width="5dp"
+        android:color="@color/secundario" />
+
+    <!-- Opcional: Esquinas redondeadas -->
+    <corners android:radius="10dp" />
+
+</shape>
