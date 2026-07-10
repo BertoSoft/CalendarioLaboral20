@@ -1,15 +1,17 @@
 package com.example.calendariolaboral20.domain
 
 import android.content.Context
+import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.data.databases.AdminDb
+import com.example.calendariolaboral20.data.models.DatosMenuPrincipal
 import com.example.calendariolaboral20.data.models.DatosRegistro
-import java.io.File
 import java.util.Calendar
 
 class FuncHome {
 
     //
     // Devuelve true, si existe, null
+    //
     fun isPrimeraEjecucion(miContexto: Context): Boolean {
 
         //
@@ -161,4 +163,39 @@ class FuncHome {
         return datoRegistro
     }
 
+    fun getListaMenuPrincipal(miContexto: Context): List<DatosMenuPrincipal>{
+        return listOf(
+            DatosMenuPrincipal(
+                R.drawable.exceso_jornada,
+                "Resumen Exceso Jornadas",
+                "Mostrar todos los días de exceso de jornada que disponemos en el año ..."
+            ),
+            DatosMenuPrincipal(
+                R.drawable.vacaciones,
+                "Vacaciones",
+                "Establecer periodos de vacaciones, asi como las vacaciones disfrutadas y las pendientes..."
+            ),
+            DatosMenuPrincipal(
+                R.drawable.festivos,
+                "Festivos",
+                "Establecer los distintos días y tipos de festivos del año..."
+            ),
+            DatosMenuPrincipal(
+                R.drawable.backaup,
+                "Backup",
+                "Guardar o cargar una copia de seguridad de los datos del programa..."
+            ),
+            DatosMenuPrincipal(
+                R.drawable.calendario_laboral,
+                "Calendario Laboral",
+                "Visualizar un calendario labral anual, con los distintos festivos..."
+            ),
+            DatosMenuPrincipal(
+                R.drawable.salir,
+                "Salir",
+                "Salir de App..."
+            )
+
+        )
+    }
 }

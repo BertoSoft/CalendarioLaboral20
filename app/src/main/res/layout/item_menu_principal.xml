@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/backcolor"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
+    <ImageView
+        android:id="@+id/ivImagen"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        style="@style/TextosTitulos"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
+        tools:text="Exceso Jornada" />
+
+    <TextView
+        android:id="@+id/tvDescripcion"
+        style="@style/TextosNormales"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:textAlignment="center"
+        tools:text="Mostrar los días de excesos de jornada en el año en curso..." />
+
+</androidx.cardview.widget.CardView>
