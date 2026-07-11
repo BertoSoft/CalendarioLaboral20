@@ -6,6 +6,35 @@ import java.util.Locale
 
 class FuncAux {
 
+    fun calFechaFromstrFechaCorta(strFechaCorta: String): Calendar{
+
+        //
+        // Esta funcion si recibe strFecha vacio devuelve 01/01/1900
+        //
+        val calFecha = Calendar.getInstance()
+
+        //
+        // Si la strFecha no esta vacia
+        //
+        if (strFechaCorta != "") {
+            val iAno = strFechaCorta.substring(6, 10).toInt()
+            var iMes = strFechaCorta.substring(3, 5).toInt()
+            val iDia = strFechaCorta.substring(0, 2).toInt()
+
+            iMes--
+            calFecha.set(iAno, iMes, iDia)
+        }
+
+        //
+        // strFechaCorta esta vacia, o es nula, ponemos 1 de enero de 1900
+        //
+        else {
+            calFecha.set(1900, 0, 1)
+        }
+
+        return calFecha
+    }
+
     fun strFechaLargaFromCalendar(fecha: Calendar): String {
         val sdfLarga = SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy", Locale.getDefault())
         return sdfLarga.format(fecha.time)

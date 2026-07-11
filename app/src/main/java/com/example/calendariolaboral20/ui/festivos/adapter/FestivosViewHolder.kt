@@ -23,7 +23,7 @@ class FestivosViewHolder(view: View): RecyclerView.ViewHolder(view) {
         binding.tvTipoFestivo.text = strTipoFestivo
 
         when (datoFestivos.strTipo) {
-            "Nacional" -> {
+            "Nacionales" -> {
                 binding.tvTipoFestivo.setBackgroundColor(
                     ContextCompat.getColor(
                         itemView.context,

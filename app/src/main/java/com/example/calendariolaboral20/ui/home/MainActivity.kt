@@ -39,16 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initRv() {
-        miAdapter = HomeAdapter(
-            FuncHome().getListaMenuPrincipal(this),
-            {datoMenuPrincipal -> onClickLambda(datoMenuPrincipal) }
-        )
-
-        binding.rvMenuPrincipal.layoutManager = LinearLayoutManager(this)
-        binding.rvMenuPrincipal.adapter = miAdapter
-    }
-
     private fun initApp() {
 
         //
@@ -92,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 // Se produjo un error al grabar datos en la tabla registro
                 //
                 Toast.makeText(
-                  this,
+                    this,
                     "Se produjo un error al grabar datos en la Base de Datos...",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -102,7 +92,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun onClickLambda(datoMenuPrincipal: DatosMenuPrincipal){
+    private fun initRv() {
+        miAdapter = HomeAdapter(
+            FuncHome().getListaMenuPrincipal(this),
+            {datoMenuPrincipal -> onClickLambda(datoMenuPrincipal) }
+        )
+
+        binding.rvMenuPrincipal.layoutManager = LinearLayoutManager(this)
+        binding.rvMenuPrincipal.adapter = miAdapter
+    }
+
+    private fun onClickLambda(datoMenuPrincipal: DatosMenuPrincipal){
         when (datoMenuPrincipal.strTitulo) {
             "Salir" -> callSalirApp()
             "Festivos" -> callFestivos()

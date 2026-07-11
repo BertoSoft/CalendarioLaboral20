@@ -107,7 +107,7 @@ class FuncVacasPendientes {
 
         if(cVacasPendientes.moveToFirst()){
             while (!cVacasPendientes.isAfterLast){
-                val colId = cVacasPendientes.getColumnIndex("_id")
+                val colId = cVacasPendientes.getColumnIndex("id")
                 val colYear = cVacasPendientes.getColumnIndex("Year")
                 val strYear = cVacasPendientes.getString(colYear)
 

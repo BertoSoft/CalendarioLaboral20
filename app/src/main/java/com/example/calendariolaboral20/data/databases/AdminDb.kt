@@ -26,7 +26,7 @@ class AdminDb(
         // Estructura de la Tabla Registro
         //
         var TABLE = "Registro"
-        var KEY_ID = "id"
+        var KEY_ID = "_id"
         var KEY_1 = "Dia"
         var KEY_2 = "Hora"
 
@@ -41,7 +41,7 @@ class AdminDb(
         // Estructura de la Tabla Festivos
         //
         TABLE = "Festivos"
-        KEY_ID = "id"
+        KEY_ID = "_id"
         KEY_1 = "Dia"
         KEY_2 = "Tipo"
 
@@ -57,7 +57,7 @@ class AdminDb(
         // Estructura de la Tabla Vacaciones
         //
         TABLE = "Vacaciones"
-        KEY_ID = "id"
+        KEY_ID = "_id"
         KEY_1 = "Fecha1"
         KEY_2 = "Fecha2"
 
@@ -73,7 +73,7 @@ class AdminDb(
         // Estructura de la Tabla VacasPendientes
         //
         TABLE = "VacasPendientes"
-        KEY_ID = "id"
+        KEY_ID = "_id"
         KEY_1 = "Year"
         KEY_2 = "Dias"
 

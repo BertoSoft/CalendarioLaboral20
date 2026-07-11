@@ -52,7 +52,8 @@ class Festivos : AppCompatActivity() {
                 calFecha.set(Calendar.YEAR, year)
                 calFecha.set(Calendar.MONTH, monthOfYear)
                 calFecha.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                binding.tvFecha.text = FuncAux().strFechaCortaToCalendar(calFecha)
+                binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFecha)
+                binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFecha)
             }
 
         //
@@ -63,6 +64,15 @@ class Festivos : AppCompatActivity() {
             activaControles()
             binding.ivEliminar.isVisible = false
             binding.spFestivo.performClick()
+        }
+
+        //
+        // Se pulsa ivEliminar eliminar
+        //
+        binding.ivEliminar.setOnClickListener {
+            if(binding.tvFecha.text != "" && binding.spFestivo.selectedItem != 0){
+                borrarDatos()
+            }
         }
 
         //
@@ -92,7 +102,8 @@ class Festivos : AppCompatActivity() {
                     //
                     // Lanzamos el datepicker
                     //
-                    binding.tvFecha.text = FuncAux().strFechaCortaToCalendar(calFecha)
+                    binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFecha)
+                    binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFecha)
                     DatePickerDialog(
                         binding.spFestivo.context,
                         setFechaListener,
@@ -167,85 +178,8 @@ class Festivos : AppCompatActivity() {
                 guardarDatos()
             }
         }
+
     }
-
-    fun guardarDatos() {
-        var res = false
-
-        val datoFestivo = DatosFestivos(
-            binding.tvFecha.text.toString(),
-            binding.spFestivo.selectedItem.toString()
-        )
-        //
-        // Si son vacaciones llamo setVacaciones
-        //
-        if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
-
-            //
-            // Llammamos setVacaciones
-            //
-
-
-        }
-
-        //
-        // Es Festivo pero no vacaciones
-        //
-        else{
-
-            //
-            // Si tipo no esta vacio grabo el dato, si esta vacio devuelvo control a Festivos
-            //
-            if(binding.spFestivo.selectedItem.toString() == ""){
-                Toast.makeText(
-                    binding.btnGuardar.context,
-                    "Debes señalar que tipo de festivo deseas guardar...",
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.spFestivo.performClick()
-            }
-            else{
-                res = FuncFestivos().setDatoFestivo(
-                    this,
-                    datoFestivo
-                )
-            }
-
-
-        }
-
-        //
-        // Segun resultado de res informamos como ha ido la grabacion del dato
-        //
-        if(res){
-            Toast.makeText(
-                binding.btnGuardar.context,
-                "Fecha Festiva Añadida con Exito...",
-                Toast.LENGTH_SHORT
-            ).show()
-            limpiaControles()
-            desactivaControles()
-            binding.ivEliminar.isVisible = false
-
-            miAdapter.funRefrescaLista(
-                FuncFestivos().getListaFestivosAnuales(
-                    binding.btnGuardar.context,
-                    binding.spAno.selectedItem.toString()
-                )
-            )
-
-
-
-        }
-
-        //
-        // Se produjo un error al grabar el dato de Festivos en la tabla
-        //
-        else{
-
-        }
-    }
-
 
     private fun initRv() {
 
@@ -268,7 +202,22 @@ class Festivos : AppCompatActivity() {
         binding.rvFestivos.adapter = miAdapter
     }
 
-    fun onClickLambda(datoFestivos: DatosFestivos){
+    private fun onClickLambda(datoFestivos: DatosFestivos){
+        var iPos = 0
+
+        when(datoFestivos.strTipo){
+            "Nacionales"            -> iPos = 1
+            "Autonomico"            -> iPos = 2
+            "Local"                 -> iPos = 3
+            "Convenio"              -> iPos = 4
+            "Exceso de Jornada"     -> iPos = 5
+            "Vacaciones"            -> iPos = 6
+        }
+        activaControles()
+        binding.ivEliminar.isVisible = true
+        binding.tvFecha.tag = datoFestivos.strDia
+        binding.tvFecha.text = FuncAux().strFechaLargaFromFechaCorta(datoFestivos.strDia)
+        binding.spFestivo.setSelection(iPos)
 
     }
 
@@ -339,4 +288,139 @@ class Festivos : AppCompatActivity() {
         binding.tvFecha.isEnabled = false
         binding.btnGuardar.isEnabled = false
     }
+
+    private fun borrarDatos(){
+        val datoFestivo = DatosFestivos(
+            binding.tvFecha.tag.toString(),
+            binding.spFestivo.selectedItem.toString()
+        )
+
+        //
+        // Si son vacaciones llamo a delVacaciones()
+        //
+        if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
+
+        }
+
+        //
+        // Si es cualquier otro festivo
+        //
+        else{
+
+            //
+            // Si tipo esta vacio devuelvo control a Festivos
+            //
+            if(binding.spFestivo.selectedItem.toString() == ""){
+                Toast.makeText(
+                    binding.btnGuardar.context,
+                    "Debes señalar que tipo de festivo deseas guardar...",
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.spFestivo.performClick()
+            }
+
+            //
+            // Todo Correcto, borramos el dato
+            //
+            else{
+                FuncFestivos().delDatoFestivo(
+                    this,
+                    datoFestivo
+                )
+                limpiaControles()
+                desactivaControles()
+                binding.ivEliminar.isVisible = false
+
+                miAdapter.funRefrescaLista(
+                    FuncFestivos().getListaFestivosAnuales(
+                        binding.btnGuardar.context,
+                        binding.spAno.selectedItem.toString()
+                    )
+                )
+            }
+
+        }
+    }
+
+    private fun guardarDatos() {
+        var res = false
+
+        val datoFestivo = DatosFestivos(
+            binding.tvFecha.tag.toString(),
+            binding.spFestivo.selectedItem.toString()
+        )
+        //
+        // Si son vacaciones llamo setVacaciones
+        //
+        if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
+
+            //
+            // Llammamos setVacaciones
+            //
+
+
+        }
+
+        //
+        // Es Festivo pero no vacaciones
+        //
+        else{
+
+            //
+            // Si tipo esta vacio devuelvo control a Festivos
+            //
+            if(binding.spFestivo.selectedItem.toString() == ""){
+                Toast.makeText(
+                    binding.btnGuardar.context,
+                    "Debes señalar que tipo de festivo deseas guardar...",
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.spFestivo.performClick()
+            }
+
+            //
+            // Todo Correcto, grabamos el dato
+            //
+            else{
+                res = FuncFestivos().setDatoFestivo(
+                    this,
+                    datoFestivo
+                )
+            }
+
+
+        }
+
+        //
+        // Segun resultado de res informamos como ha ido la grabacion del dato
+        //
+        if(res){
+            Toast.makeText(
+                binding.btnGuardar.context,
+                "Fecha Festiva Añadida con Exito...",
+                Toast.LENGTH_SHORT
+            ).show()
+            limpiaControles()
+            desactivaControles()
+            binding.ivEliminar.isVisible = false
+
+            miAdapter.funRefrescaLista(
+                FuncFestivos().getListaFestivosAnuales(
+                    binding.btnGuardar.context,
+                    binding.spAno.selectedItem.toString()
+                )
+            )
+
+
+
+        }
+
+        //
+        // Se produjo un error al grabar el dato de Festivos en la tabla
+        //
+        else{
+
+        }
+    }
+
 }

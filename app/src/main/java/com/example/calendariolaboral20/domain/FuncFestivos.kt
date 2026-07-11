@@ -1,12 +1,55 @@
 package com.example.calendariolaboral20.domain
 
 import android.content.Context
+import androidx.core.os.registerForAllProfilingResults
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.calendariolaboral20.data.databases.AdminDb
+import com.example.calendariolaboral20.data.models.DatosCalendarFestivos
 import com.example.calendariolaboral20.data.models.DatosFestivos
 import com.example.calendariolaboral20.data.models.DatosVacasPendientes
 
 class FuncFestivos {
+
+    fun ordenarListaFestivos(listaFestivos: List<DatosFestivos>): List<DatosFestivos>{
+        val listaFestivosOrdenada = mutableListOf<DatosFestivos>()
+        val listaCalendar = mutableListOf<DatosCalendarFestivos>()
+
+        //
+        // Creamos la lista Calendar
+        //
+        var i = 0
+        while (i < listaFestivos.size){
+            listaCalendar.add(
+                DatosCalendarFestivos(
+                    FuncAux().calFechaFromstrFechaCorta(listaFestivos[i].strDia),
+                    listaFestivos[i].strDia,
+                    listaFestivos[i].strTipo
+                )
+            )
+            i++
+        }
+
+        //
+        // Ordenamos la lista Calendar
+        //
+        val listaCalendarOrdenada = listaCalendar.sortedBy { it.calFecha }
+
+        //
+        // Creamos la lista Festivos Ordenada
+        //
+        i = 0
+        while (i < listaCalendarOrdenada.size){
+            listaFestivosOrdenada.add(
+                DatosFestivos(
+                    listaCalendarOrdenada[i].strFecha,
+                    listaCalendarOrdenada[i].strTipo
+                )
+            )
+            i++
+        }
+
+        return  listaFestivosOrdenada
+    }
 
     fun getDatoFestivosById(miContexto: Context, id: Int): DatosFestivos {
         var id = -1
@@ -43,7 +86,7 @@ class FuncFestivos {
         val cFestivos = sqlRead.rawQuery("SELECT *FROM Festivos", null)
         var i = 0
 
-        if(cFestivos.moveToFirst()){
+        if(cFestivos.moveToFirst())
             while (!cFestivos.isAfterLast){
                 val colId = cFestivos.getColumnIndex("_id")
                 val colDia = cFestivos.getColumnIndex("Dia")
@@ -51,13 +94,12 @@ class FuncFestivos {
                 val strDiaDb = cFestivos.getString(colDia)
                 val strTipoDb = cFestivos.getString(colTipo)
 
-                if(miDato.strDia == strDiaDb && miDato.strTipo == strTipoDb){
+                if(miDato.strDia == strDiaDb){
                     id = cFestivos.getInt(colId)
                     cFestivos.moveToLast()
                 }
                 cFestivos.moveToNext()
             }
-        }
 
         cFestivos.close()
         sqlRead.close()
@@ -94,9 +136,9 @@ class FuncFestivos {
         //
         // Ordenamos la lista
         //
-        //val listaFestivosAnoOrdenada = FuncFestivos().ordenaLista(listaFestivosAno)
+        val listaFestivosAnoOrdenada = ordenarListaFestivos(listaFestivosAno)
 
-        return listaFestivosAno
+        return listaFestivosAnoOrdenada
     }
 
     fun setDatoFestivo(miContexto: Context, miDato: DatosFestivos): Boolean{
@@ -133,6 +175,26 @@ class FuncFestivos {
         sqlWrite.close()
         adminDb.close()
         return false
+    }
+
+    fun delDatoFestivo(miContexto: Context, miDato: DatosFestivos): Boolean{
+        val id = getIdFestivosByDato(miContexto, miDato)
+        val adminDb = AdminDb(miContexto, null)
+        val sqlWrite = adminDb.writableDatabase
+
+        if(id < 0){
+            sqlWrite.close()
+            adminDb.close()
+            return false
+        }
+        else{
+            val strSql = "DELETE FROM Festivos WHERE _id = $id"
+
+            sqlWrite.execSQL(strSql)
+            sqlWrite.close()
+            adminDb.close()
+        }
+        return  true
     }
 
 }

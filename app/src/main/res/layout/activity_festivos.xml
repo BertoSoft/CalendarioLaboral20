@@ -77,7 +77,6 @@
 
         <Spinner
             android:id="@+id/spFestivo"
-            style="@style/TextosSp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
