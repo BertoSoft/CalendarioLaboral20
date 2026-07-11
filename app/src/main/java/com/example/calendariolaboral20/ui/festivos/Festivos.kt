@@ -5,18 +5,23 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.data.models.DatosFestivos
 import com.example.calendariolaboral20.databinding.ActivityFestivosBinding
 import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncFestivos
+import com.example.calendariolaboral20.ui.festivos.adapter.FestivosAdapter
 import java.util.Calendar
 
 private lateinit var binding: ActivityFestivosBinding
 private var calFecha = Calendar.getInstance()
+private lateinit var miAdapter: FestivosAdapter
 
 class Festivos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +69,10 @@ class Festivos : AppCompatActivity() {
         // Cambio seleccion spFestivos
         //
         binding.spFestivo.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            //
+            // Se Ha echo una seleccion
+            //
             override fun onItemSelected(
                 p0: AdapterView<*>?,
                 p1: View?,
@@ -74,7 +83,11 @@ class Festivos : AppCompatActivity() {
                 //
                 // Se ha hecho una seleccion, si ivEliminar esta invisible, lanzamos el selector de fechas
                 //
-                if(p2 != 0 && !binding.ivEliminar.isVisible){
+                if(
+                    p2 != 0 &&
+                    !binding.ivEliminar.isVisible &&
+                    binding.tvFecha.text == ""
+                    ){
 
                     //
                     // Lanzamos el datepicker
@@ -91,11 +104,37 @@ class Festivos : AppCompatActivity() {
                 }
             }
 
+            //
+            // No se ha seleccionado nada
+            //
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
-                //
-                // No se ha seleccionado nada
-                //
+            }
+
+        }
+
+        //
+        // Cambia sp Ano
+        //
+        binding.spAno.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long
+            ) {
+                limpiaControles()
+                desactivaControles()
+                binding.ivEliminar.isVisible = false
+                miAdapter.funRefrescaLista(
+                    FuncFestivos().getListaFestivosAnuales(
+                        binding.spAno.context,
+                        binding.spAno.selectedItem.toString()
+                    )
+                )
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
 
         }
@@ -126,9 +165,6 @@ class Festivos : AppCompatActivity() {
         binding.btnGuardar.setOnClickListener {
             if(binding.tvFecha.text != "" && binding.spFestivo.selectedItem != 0){
                 guardarDatos()
-                limpiaControles()
-                desactivaControles()
-                binding.ivEliminar.isVisible = false
             }
         }
     }
@@ -141,7 +177,7 @@ class Festivos : AppCompatActivity() {
             binding.spFestivo.selectedItem.toString()
         )
         //
-        // Si son vacaciones llamo setVacaciones, si es otro setFestivo
+        // Si son vacaciones llamo setVacaciones
         //
         if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
 
@@ -151,27 +187,88 @@ class Festivos : AppCompatActivity() {
 
 
         }
+
+        //
+        // Es Festivo pero no vacaciones
+        //
         else{
 
-            res = FuncFestivos().setFestivo(
-                this,
-                datoFestivo
+            //
+            // Si tipo no esta vacio grabo el dato, si esta vacio devuelvo control a Festivos
+            //
+            if(binding.spFestivo.selectedItem.toString() == ""){
+                Toast.makeText(
+                    binding.btnGuardar.context,
+                    "Debes señalar que tipo de festivo deseas guardar...",
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.spFestivo.performClick()
+            }
+            else{
+                res = FuncFestivos().setDatoFestivo(
+                    this,
+                    datoFestivo
                 )
+            }
+
+
         }
 
         //
         // Segun resultado de res informamos como ha ido la grabacion del dato
         //
+        if(res){
+            Toast.makeText(
+                binding.btnGuardar.context,
+                "Fecha Festiva Añadida con Exito...",
+                Toast.LENGTH_SHORT
+            ).show()
+            limpiaControles()
+            desactivaControles()
+            binding.ivEliminar.isVisible = false
+
+            miAdapter.funRefrescaLista(
+                FuncFestivos().getListaFestivosAnuales(
+                    binding.btnGuardar.context,
+                    binding.spAno.selectedItem.toString()
+                )
+            )
 
 
 
+        }
 
+        //
+        // Se produjo un error al grabar el dato de Festivos en la tabla
+        //
+        else{
 
-
+        }
     }
 
 
     private fun initRv() {
+
+        val tmp = FuncFestivos().getListaFestivosAnuales(
+            this,
+            binding.spAno.selectedItem.toString()
+        )
+
+
+
+        miAdapter = FestivosAdapter(
+            FuncFestivos().getListaFestivosAnuales(
+                this,
+                binding.spAno.selectedItem.toString()
+            ),
+            { datoFestivos -> onClickLambda(datoFestivos) }
+        )
+
+        binding.rvFestivos.layoutManager = GridLayoutManager(this, 1)
+        binding.rvFestivos.adapter = miAdapter
+    }
+
+    fun onClickLambda(datoFestivos: DatosFestivos){
 
     }
 
@@ -221,7 +318,7 @@ class Festivos : AppCompatActivity() {
         )
         miAdaptadorSp.setDropDownViewResource(R.layout.item_sp)
         binding.spAno.adapter = miAdaptadorSp
-
+        binding.spAno.setSelection(1)
 
     }
 

@@ -98,10 +98,7 @@ class FuncVacasPendientes {
         return -1
     }
 
-    fun getIdVacaspendientesByDato(
-        miContexto: Context,
-        miDato: DatosVacasPendientes
-    ): Int {
+    fun getIdVacaspendientesByDato(miContexto: Context, miDato: DatosVacasPendientes): Int {
         var id = -1
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
