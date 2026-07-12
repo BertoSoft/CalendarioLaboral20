@@ -24,6 +24,7 @@ private var calFecha = Calendar.getInstance()
 private lateinit var miAdapter: FestivosAdapter
 
 class Festivos : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFestivosBinding.inflate(layoutInflater)
@@ -200,6 +201,33 @@ class Festivos : AppCompatActivity() {
 
         binding.rvFestivos.layoutManager = GridLayoutManager(this, 1)
         binding.rvFestivos.adapter = miAdapter
+        scrollRv()
+    }
+
+    private fun scrollRv() {
+
+        //
+        // Esta funcion situa el primer festivo de la vista como el primero del mes corriente
+        //
+        val lista = FuncFestivos().getListaFestivosAnuales(this, binding.spAno.selectedItem.toString())
+        val iMes = Calendar.getInstance().get(Calendar.MONTH)
+        var i = 0
+        var iPos = -1
+
+        while (i < lista.size){
+            var iMesLista = lista[i].strDia.substring(3, 5).toInt()
+            iMesLista --
+            if(iMes == iMesLista){
+                iPos = i
+                i = lista.size
+            }
+            i++
+        }
+
+        //
+        // Situamos el scroll en la posicion i
+        //
+        binding.rvFestivos.scrollToPosition(iPos)
     }
 
     private fun onClickLambda(datoFestivos: DatosFestivos){

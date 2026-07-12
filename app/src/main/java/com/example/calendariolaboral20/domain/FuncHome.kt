@@ -167,13 +167,13 @@ class FuncHome {
         return listOf(
             DatosMenuPrincipal(
                 R.drawable.exceso_jornada,
-                "Resumen Exceso Jornadas",
+                "Exceso Jornadas",
                 "Mostrar todos los días de exceso de jornada que disponemos en el año ..."
             ),
             DatosMenuPrincipal(
                 R.drawable.vacaciones,
                 "Vacaciones",
-                "Establecer periodos de vacaciones, asi como las vacaciones disfrutadas y las pendientes..."
+                "Establecer periodos de vacaciones, y consultar vacaciones pendientes..."
             ),
             DatosMenuPrincipal(
                 R.drawable.festivos,
@@ -193,7 +193,7 @@ class FuncHome {
             DatosMenuPrincipal(
                 R.drawable.salir,
                 "Salir",
-                "Salir de App..."
+                "\nSalir de App..."
             )
 
         )
