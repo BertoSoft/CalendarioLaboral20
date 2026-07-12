@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.data.models.DatosFestivos
+import com.example.calendariolaboral20.data.models.DatosVacaciones
 import com.example.calendariolaboral20.databinding.ActivityFestivosBinding
 import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncFestivos
+import com.example.calendariolaboral20.domain.FuncVacaciones
+import com.example.calendariolaboral20.domain.FuncVacasPendientes
 import com.example.calendariolaboral20.ui.festivos.adapter.FestivosAdapter
 import java.util.Calendar
 
@@ -139,7 +140,7 @@ class Festivos : AppCompatActivity() {
                 desactivaControles()
                 binding.ivEliminar.isVisible = false
                 miAdapter.funRefrescaLista(
-                    FuncFestivos().getListaFestivosAnuales(
+                    FuncFestivos().getListaFestivosAndVacacionesAnuales(
                         binding.spAno.context,
                         binding.spAno.selectedItem.toString()
                     )
@@ -184,15 +185,8 @@ class Festivos : AppCompatActivity() {
 
     private fun initRv() {
 
-        val tmp = FuncFestivos().getListaFestivosAnuales(
-            this,
-            binding.spAno.selectedItem.toString()
-        )
-
-
-
         miAdapter = FestivosAdapter(
-            FuncFestivos().getListaFestivosAnuales(
+            FuncFestivos().getListaFestivosAndVacacionesAnuales(
                 this,
                 binding.spAno.selectedItem.toString()
             ),
@@ -209,7 +203,7 @@ class Festivos : AppCompatActivity() {
         //
         // Esta funcion situa el primer festivo de la vista como el primero del mes corriente
         //
-        val lista = FuncFestivos().getListaFestivosAnuales(this, binding.spAno.selectedItem.toString())
+        val lista = FuncFestivos().getListaFestivosAndVacacionesAnuales(this, binding.spAno.selectedItem.toString())
         val iMes = Calendar.getInstance().get(Calendar.MONTH)
         var i = 0
         var iPos = -1
@@ -328,6 +322,26 @@ class Festivos : AppCompatActivity() {
         //
         if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
 
+            //
+            // Todo Correcto borramos dato de vacaciones
+            //
+            val res = FuncVacaciones().delDatoVacaciones(
+                this,
+                DatosVacaciones(
+                    datoFestivo.strDia,
+                    datoFestivo.strDia
+                )
+            )
+            limpiaControles()
+            desactivaControles()
+            binding.ivEliminar.isVisible = false
+
+            miAdapter.funRefrescaLista(
+                FuncFestivos().getListaFestivosAndVacacionesAnuales(
+                    binding.btnGuardar.context,
+                    binding.spAno.selectedItem.toString()
+                )
+            )
         }
 
         //
@@ -360,7 +374,7 @@ class Festivos : AppCompatActivity() {
                 binding.ivEliminar.isVisible = false
 
                 miAdapter.funRefrescaLista(
-                    FuncFestivos().getListaFestivosAnuales(
+                    FuncFestivos().getListaFestivosAndVacacionesAnuales(
                         binding.btnGuardar.context,
                         binding.spAno.selectedItem.toString()
                     )
@@ -383,9 +397,15 @@ class Festivos : AppCompatActivity() {
         if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
 
             //
-            // Llammamos setVacaciones
+            // Todo Correcto,  Llammamos setVacaciones
             //
-
+            res = FuncVacaciones().setDatoVacaciones(
+                this,
+                DatosVacaciones(
+                    datoFestivo.strDia,
+                    datoFestivo.strDia
+                )
+            )
 
         }
 
@@ -433,14 +453,11 @@ class Festivos : AppCompatActivity() {
             binding.ivEliminar.isVisible = false
 
             miAdapter.funRefrescaLista(
-                FuncFestivos().getListaFestivosAnuales(
+                FuncFestivos().getListaFestivosAndVacacionesAnuales(
                     binding.btnGuardar.context,
                     binding.spAno.selectedItem.toString()
                 )
             )
-
-
-
         }
 
         //

@@ -2,6 +2,7 @@ package com.example.calendariolaboral20.domain
 
 import android.content.Context
 import com.example.calendariolaboral20.data.databases.AdminDb
+import com.example.calendariolaboral20.data.models.DatosVacaciones
 import com.example.calendariolaboral20.data.models.DatosVacasPendientes
 import java.util.Calendar
 
@@ -124,6 +125,10 @@ class FuncVacasPendientes {
         adminDb.close()
 
         return id
+    }
+
+    fun restaVacasPendientes(miContexto: Context, miDato: DatosVacaciones) {
+        TODO("Not yet implemented")
     }
 
 }

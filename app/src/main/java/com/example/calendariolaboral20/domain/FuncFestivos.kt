@@ -1,12 +1,11 @@
 package com.example.calendariolaboral20.domain
 
 import android.content.Context
-import androidx.core.os.registerForAllProfilingResults
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.calendariolaboral20.data.databases.AdminDb
 import com.example.calendariolaboral20.data.models.DatosCalendarFestivos
 import com.example.calendariolaboral20.data.models.DatosFestivos
-import com.example.calendariolaboral20.data.models.DatosVacasPendientes
+import com.example.calendariolaboral20.data.models.DatosVacaciones
+import com.example.calendariolaboral20.ui.festivos.Festivos
 
 class FuncFestivos {
 
@@ -52,14 +51,13 @@ class FuncFestivos {
     }
 
     fun getDatoFestivosById(miContexto: Context, id: Int): DatosFestivos {
-        var id = -1
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
         val cFestivos = sqlRead.rawQuery("SELECT *FROM Festivos", null)
         val colId = cFestivos.getColumnIndex("_id")
         val colDia = cFestivos.getColumnIndex("Dia")
         val colTipo = cFestivos.getColumnIndex("Tipo")
-        var datoFestivos = DatosFestivos("", "")
+        val datoFestivos = DatosFestivos("", "")
 
         if (cFestivos.moveToFirst()){
             while (!cFestivos.isAfterLast){
@@ -84,15 +82,12 @@ class FuncFestivos {
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
         val cFestivos = sqlRead.rawQuery("SELECT *FROM Festivos", null)
-        var i = 0
 
         if(cFestivos.moveToFirst())
             while (!cFestivos.isAfterLast){
                 val colId = cFestivos.getColumnIndex("_id")
                 val colDia = cFestivos.getColumnIndex("Dia")
-                val colTipo = cFestivos.getColumnIndex("Tipo")
                 val strDiaDb = cFestivos.getString(colDia)
-                val strTipoDb = cFestivos.getString(colTipo)
 
                 if(miDato.strDia == strDiaDb){
                     id = cFestivos.getInt(colId)
@@ -139,6 +134,24 @@ class FuncFestivos {
         val listaFestivosAnoOrdenada = ordenarListaFestivos(listaFestivosAno)
 
         return listaFestivosAnoOrdenada
+    }
+
+    fun getListaFestivosAndVacacionesAnuales(miContexto: Context, strAno: String): List<DatosFestivos>{
+        var listaFestivos = getListaFestivosAnuales(miContexto, strAno)
+        val listaVacaciones = FuncVacaciones().getListaVacacionesAnuales(miContexto, strAno)
+
+        var i = 0
+        while (i < listaVacaciones.size){
+            if(listaVacaciones[i].strFecha1 == listaVacaciones[i].strFecha2){
+                listaFestivos += DatosFestivos(listaVacaciones[i].strFecha1, "Vacaciones")
+            }
+
+            i++
+        }
+
+        val listaOrdenada = ordenarListaFestivos(listaFestivos)
+
+        return listaOrdenada
     }
 
     fun setDatoFestivo(miContexto: Context, miDato: DatosFestivos): Boolean{
