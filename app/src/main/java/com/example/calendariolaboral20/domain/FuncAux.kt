@@ -6,7 +6,7 @@ import java.util.Locale
 
 class FuncAux {
 
-    fun calFechaFromstrFechaCorta(strFechaCorta: String): Calendar{
+    fun calFechaFromstrFechaCorta(strFechaCorta: String):Calendar{
 
         //
         // Esta funcion si recibe strFecha vacio devuelve 01/01/1900

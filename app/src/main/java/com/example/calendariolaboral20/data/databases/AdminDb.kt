@@ -4,6 +4,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+//
+// Mi clase Sqlite que hereda de SQLiteOpenHelper
+//
 class AdminDb(
     miContexto: Context,
     factory: SQLiteDatabase.CursorFactory?
@@ -83,9 +86,6 @@ class AdminDb(
                 "$KEY_1 TEXT, " +
                 "$KEY_2 TEXT)")
         db.execSQL(strSql)
-
-
-
     }
 
     override fun onUpgrade(
@@ -93,7 +93,6 @@ class AdminDb(
         p1: Int,
         p2: Int
     ) {
-
         p0?.execSQL(/* sql = */ "DROP TABLE IF EXISTS Registro")
         p0?.execSQL(/* sql = */ "DROP TABLE IF EXISTS Festivos")
         p0?.execSQL(/* sql = */ "DROP TABLE IF EXISTS Vacaciones")
