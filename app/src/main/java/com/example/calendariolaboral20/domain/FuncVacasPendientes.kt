@@ -107,6 +107,37 @@ class FuncVacasPendientes {
         return  iDias
     }
 
+    fun getListaVacasPendientes(miContexto: Context): List<DatosVacasPendientes> {
+        val adminDb = AdminDb(miContexto, null)
+        val sqlRead = adminDb.readableDatabase
+        val cVacasPendientes = sqlRead.rawQuery("SELECT *FROM VacasPendientes", null)
+        val listaVacasPendientes = mutableListOf<DatosVacasPendientes>()
+
+        if(cVacasPendientes.moveToFirst()){
+            while (!cVacasPendientes.isAfterLast){
+                val colYear = cVacasPendientes.getColumnIndex("Year")
+                val colDias = cVacasPendientes.getColumnIndex("Dias")
+
+                val strYear = cVacasPendientes.getString(colYear)
+                val strDias = cVacasPendientes.getString(colDias)
+
+                listaVacasPendientes.add(
+                    DatosVacasPendientes(
+                        strYear,
+                        strDias
+                    )
+                )
+                cVacasPendientes.moveToNext()
+            }
+        }
+
+        cVacasPendientes.close()
+        sqlRead.close()
+        adminDb.close()
+
+        return listaVacasPendientes
+    }
+
     fun setDatoVacasPendientes(miContexto: Context, miDato: DatosVacasPendientes): Int {
         val adminDb = AdminDb(miContexto, null)
         val sqlWrite = adminDb.writableDatabase
@@ -167,35 +198,28 @@ class FuncVacasPendientes {
         }
     }
 
-    private fun getListaVacasPendientes(miContexto: Context): List<DatosVacasPendientes> {
-        val adminDb = AdminDb(miContexto, null)
-        val sqlRead = adminDb.readableDatabase
-        val cVacasPendientes = sqlRead.rawQuery("SELECT *FROM VacasPendientes", null)
-        val listaVacasPendientes = mutableListOf<DatosVacasPendientes>()
+    fun sumaVacasPendientes(miContexto: Context, miDato: DatosVacaciones) {
+        var iAno = miDato.strFecha1.substring(6, 10).toInt()
+        val iMAxAno = FuncAux().strFechaCortaToCalendar(Calendar.getInstance()).substring(6, 10).toInt() + 1
+        var i = 0
 
-        if(cVacasPendientes.moveToFirst()){
-            while (!cVacasPendientes.isAfterLast){
-                val colYear = cVacasPendientes.getColumnIndex("Year")
-                val colDias = cVacasPendientes.getColumnIndex("Dias")
+        //
+        // obtenemos los dias laborables
+        //
+        val iDiasLaborables = FuncVacaciones().getDiasLaborables(miContexto, miDato)
+        while (iAno <= iMAxAno){
+            val iDiasOld = getDiasPendientesByAno(miContexto, iAno.toString())
+            val iDias = iDiasOld + iDiasLaborables
 
-                val strYear = cVacasPendientes.getString(colYear)
-                val strDias = cVacasPendientes.getString(colDias)
-
-                listaVacasPendientes.add(
-                    DatosVacasPendientes(
-                        strYear,
-                        strDias
-                    )
+            setDatoVacasPendientes(
+                miContexto,
+                DatosVacasPendientes(
+                    iAno.toString(),
+                    iDias.toString()
                 )
-                cVacasPendientes.moveToNext()
-            }
+            )
+            iAno++
         }
-
-        cVacasPendientes.close()
-        sqlRead.close()
-        adminDb.close()
-
-        return listaVacasPendientes
     }
 
 }

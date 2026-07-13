@@ -232,7 +232,7 @@ class FuncVacaciones {
             //
             // Sumamos Dias a Vacaciones Pendientes
             //
-            //FuncVacasPendientes().sumaVacasPendientes(miContexto, miDato)
+            FuncVacasPendientes().sumaVacasPendientes(miContexto, miDato)
         }
         return  true
     }

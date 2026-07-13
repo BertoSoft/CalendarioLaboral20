@@ -21,18 +21,9 @@ class FuncHome {
         val dbFile = miContexto.getDatabasePath(dbName)
 
         if (dbFile.exists()) {
-
-            //
-            // La base de datos ya fue creada anteriormente
-            //
             return false
-        } else {
-
-            //
-            // La base de datos no existe físicamente en el almacenamiento
-            //
-            return true
         }
+        return true
     }
 
     fun getIdRegistroByDato(miContexto: Context, miDato: DatosRegistro): Int {
@@ -40,13 +31,13 @@ class FuncHome {
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
         val cRegistro = sqlRead.rawQuery("SELECT *FROM Registro", null)
-        var i = 0
 
         if (cRegistro.moveToFirst()) {
             while (!cRegistro.isAfterLast) {
                 val colId = cRegistro.getColumnIndex("_id")
                 val colDia = cRegistro.getColumnIndex("Dia")
                 val colHora = cRegistro.getColumnIndex("Hora")
+
                 val strDiaDb = cRegistro.getString(colDia)
                 val strHoraDb = cRegistro.getString(colHora)
 
@@ -65,10 +56,10 @@ class FuncHome {
     }
 
     fun getDatoRegistroById(miContexto: Context, id: Int): DatosRegistro {
-        var datoRegistro = DatosRegistro(null, null)
         val adminDb = AdminDb(miContexto, null)
         val sqlReadDb = adminDb.readableDatabase
         val cRegistro = sqlReadDb.rawQuery("SELECT *FROM Registro", null)
+        var datoRegistro = DatosRegistro(null, null)
 
         if (cRegistro.moveToFirst()) {
             while (!cRegistro.isAfterLast) {
@@ -84,7 +75,6 @@ class FuncHome {
                 cRegistro.moveToNext()
             }
         }
-
         cRegistro.close()
         sqlReadDb.close()
         adminDb.close()
@@ -163,9 +153,7 @@ class FuncHome {
         if(isSetRegistro){
             return true
         }
-        else{
-            return false
-        }
+        return false
     }
 
     fun setDatoRegistro(miContexto: Context, miDato: DatosRegistro): Boolean {
@@ -186,14 +174,12 @@ class FuncHome {
                     "${miDato.strDia}', Hora = '" +
                     "${miDato.strHora}' WHERE _id = ${id};"
         }
-
         if (strSql != null) {
             sqlWrite.execSQL(strSql)
             sqlWrite.close()
             adminDb.close()
             return true
         }
-
         sqlWrite.close()
         adminDb.close()
         return false

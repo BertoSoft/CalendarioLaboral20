@@ -179,6 +179,9 @@ class Festivos : AppCompatActivity() {
             if(binding.tvFecha.text != "" && binding.spFestivo.selectedItem != 0){
                 guardarDatos()
             }
+            else{
+                binding.spFestivo.performClick()
+            }
         }
 
     }

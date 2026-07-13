@@ -26,10 +26,11 @@ class FuncFestivos {
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
         val cFestivos = sqlRead.rawQuery("SELECT *FROM Festivos", null)
+        val datoFestivos = DatosFestivos("", "")
+
         val colId = cFestivos.getColumnIndex("_id")
         val colDia = cFestivos.getColumnIndex("Dia")
         val colTipo = cFestivos.getColumnIndex("Tipo")
-        val datoFestivos = DatosFestivos("", "")
 
         if (cFestivos.moveToFirst()){
             while (!cFestivos.isAfterLast){
@@ -41,7 +42,6 @@ class FuncFestivos {
                 cFestivos.moveToNext()
             }
         }
-
         cFestivos.close()
         sqlRead.close()
         adminDb.close()
@@ -67,7 +67,6 @@ class FuncFestivos {
                 }
                 cFestivos.moveToNext()
             }
-
         cFestivos.close()
         sqlRead.close()
         adminDb.close()
@@ -76,10 +75,11 @@ class FuncFestivos {
     }
 
     fun getListaFestivosAnuales(miContexto: Context, strAno: String): List<DatosFestivos>{
-        val listaFestivosAno = mutableListOf<DatosFestivos>()
         val adminDb = AdminDb(miContexto, null)
         val sqlReadDb = adminDb.readableDatabase
         val cFestivos = sqlReadDb.rawQuery("SELECT *FROM Festivos", null)
+        val listaFestivosAno = mutableListOf<DatosFestivos>()
+
         val iColDia = cFestivos.getColumnIndex("Dia")
         val iColTipo = cFestivos.getColumnIndex("Tipo")
 
@@ -92,7 +92,6 @@ class FuncFestivos {
                 if (strAnoDb == strAno) {
                     listaFestivosAno.add(DatosFestivos(strDiaDb, strTipoDb))
                 }
-
                 cFestivos.moveToNext()
             }
         }
@@ -100,12 +99,7 @@ class FuncFestivos {
         sqlReadDb.close()
         adminDb.close()
 
-        //
-        // Ordenamos la lista
-        //
-        val listaFestivosAnoOrdenada = ordenarListaFestivos(listaFestivosAno)
-
-        return listaFestivosAnoOrdenada
+        return ordenarListaFestivos(listaFestivosAno)
     }
 
     fun getListaFestivosAndVacacionesAnuales(miContexto: Context, strAno: String): List<DatosFestivos>{
@@ -117,13 +111,10 @@ class FuncFestivos {
             if(listaVacaciones[i].strFecha1 == listaVacaciones[i].strFecha2){
                 listaFestivos += DatosFestivos(listaVacaciones[i].strFecha1, "Vacaciones")
             }
-
             i++
         }
 
-        val listaOrdenada = ordenarListaFestivos(listaFestivos)
-
-        return listaOrdenada
+        return ordenarListaFestivos(listaFestivos)
     }
 
     fun setDatoFestivo(miContexto: Context, miDato: DatosFestivos): Boolean{
@@ -133,7 +124,7 @@ class FuncFestivos {
         var strSql: String? = null
 
         //
-        // si id < 0 datos no existe, si existe id > 0
+        // No existe registro en esa fecha
         //
         if(id < 0){
             strSql = "INSERT INTO Festivos (Dia, " +
@@ -142,7 +133,7 @@ class FuncFestivos {
         }
 
         //
-        // El Registro de ese año ya existe
+        // Ya existe un registro con esa fecha
         //
         else{
             strSql = "UPDATE Festivos SET Dia = '" +
@@ -156,7 +147,6 @@ class FuncFestivos {
             adminDb.close()
             return true
         }
-
         sqlWrite.close()
         adminDb.close()
         return false
@@ -219,7 +209,6 @@ class FuncFestivos {
             )
             i++
         }
-
         return  listaFestivosOrdenada
     }
 

@@ -42,14 +42,13 @@ class FuncAux {
 
     fun strFechaLargaFromFechaCorta(strFechaCorta: String): String {
         val calFecha = Calendar.getInstance()
-
         val iDia = strFechaCorta.substring(0, 2).toInt()
         val iMes = strFechaCorta.substring(3, 5).toInt() - 1
         val iAno = strFechaCorta.substring(6, 10).toInt()
-        calFecha.set(iAno, iMes, iDia)
-        val strFechaLarga = strFechaLargaFromCalendar(calFecha)
 
-        return strFechaLarga
+        calFecha.set(iAno, iMes, iDia)
+
+        return strFechaLargaFromCalendar(calFecha)
     }
 
     fun strFechaCortaToCalendar(calFecha: Calendar): String{
