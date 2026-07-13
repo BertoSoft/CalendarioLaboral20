@@ -23,12 +23,18 @@ class VacacionesViewHolder(view: View): RecyclerView.ViewHolder(view) {
             datoVacaciones.strFecha2
         )
 
-        val strDias =
-            "${FuncVacaciones().getDiasLaborables(itemView.context, datoVacaciones)} Días laborables."
+        val iDias = FuncVacaciones().getDiasLaborables(itemView.context, datoVacaciones)
+        var str = ""
+        if( iDias == 1){
+            str = "1 día laborable."
+        }
+        else{
+            str = "${iDias.toString()} días laborables."
+        }
 
         binding.tvFecha12.text = strFecha1
         binding.tvFecha22.text = strFecha2
-        binding.tvFecha32.text = strDias
+        binding.tvFecha32.text = str
 
         //
         // Metodo setOnClickListener de Rv de Vacaciones

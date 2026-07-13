@@ -4,8 +4,6 @@ import android.content.Context
 import com.example.calendariolaboral20.data.databases.AdminDb
 import com.example.calendariolaboral20.data.models.DatosCalendarFestivos
 import com.example.calendariolaboral20.data.models.DatosFestivos
-import com.example.calendariolaboral20.data.models.DatosVacaciones
-import com.example.calendariolaboral20.ui.festivos.Festivos
 
 class FuncFestivos {
 

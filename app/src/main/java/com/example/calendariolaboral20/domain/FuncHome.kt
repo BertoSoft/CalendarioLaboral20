@@ -59,7 +59,7 @@ class FuncHome {
         val adminDb = AdminDb(miContexto, null)
         val sqlReadDb = adminDb.readableDatabase
         val cRegistro = sqlReadDb.rawQuery("SELECT *FROM Registro", null)
-        var datoRegistro = DatosRegistro(null, null)
+        val datoRegistro = DatosRegistro(null, null)
 
         if (cRegistro.moveToFirst()) {
             while (!cRegistro.isAfterLast) {
@@ -82,7 +82,7 @@ class FuncHome {
         return datoRegistro
     }
 
-    fun getListaMenuPrincipal(miContexto: Context): List<DatosMenuPrincipal>{
+    fun getListaMenuPrincipal(): List<DatosMenuPrincipal>{
         return listOf(
             DatosMenuPrincipal(
                 R.drawable.exceso_jornada,

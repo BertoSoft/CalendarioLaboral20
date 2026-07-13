@@ -7,10 +7,15 @@ import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.data.models.DatosVacaciones
 
 class VacacionesAdapter(
-    val listaVacaciones: List<DatosVacaciones>,
+    var listaVacaciones: List<DatosVacaciones>,
     val onClickLambda: (DatosVacaciones) -> Unit
 ): RecyclerView.Adapter<VacacionesViewHolder>() {
 
+
+    fun funRefrescaLista(listaNueva: List<DatosVacaciones>) {
+        listaVacaciones = listaNueva
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,4 +37,5 @@ class VacacionesAdapter(
     }
 
     override fun getItemCount(): Int = listaVacaciones.size
+
 }

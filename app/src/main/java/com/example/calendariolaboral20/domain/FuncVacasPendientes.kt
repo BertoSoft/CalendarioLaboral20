@@ -1,7 +1,6 @@
 package com.example.calendariolaboral20.domain
 
 import android.content.Context
-import android.provider.Telephony
 import com.example.calendariolaboral20.data.databases.AdminDb
 import com.example.calendariolaboral20.data.models.DatosVacaciones
 import com.example.calendariolaboral20.data.models.DatosVacasPendientes
@@ -45,7 +44,7 @@ class FuncVacasPendientes {
         val colId = cVacasPendientes.getColumnIndex("_id")
         val colYear = cVacasPendientes.getColumnIndex("Year")
         val colDias = cVacasPendientes.getColumnIndex("Dias")
-        var datoVacasPendientes = DatosVacasPendientes("", "")
+        val datoVacasPendientes = DatosVacasPendientes("", "")
 
         if (cVacasPendientes.moveToFirst()){
             while (!cVacasPendientes.isAfterLast){
@@ -70,7 +69,6 @@ class FuncVacasPendientes {
         val adminDb = AdminDb(miContexto, null)
         val sqlRead = adminDb.readableDatabase
         val cVacasPendientes = sqlRead.rawQuery("SELECT *FROM VacasPendientes", null)
-        var i = 0
 
         if(cVacasPendientes.moveToFirst()){
             while (!cVacasPendientes.isAfterLast){
@@ -94,7 +92,6 @@ class FuncVacasPendientes {
     }
 
     fun getDiasPendientesByAno(miContexto: Context, strAno: String): Int{
-        var iDias = -1
         val listaVacasPendientes = getListaVacasPendientes(miContexto)
         var i = 0
 
@@ -104,7 +101,7 @@ class FuncVacasPendientes {
         }
             i++
         }
-        return  iDias
+        return -1
     }
 
     fun getListaVacasPendientes(miContexto: Context): List<DatosVacasPendientes> {
@@ -177,7 +174,6 @@ class FuncVacasPendientes {
     fun restaVacasPendientes(miContexto: Context, miDato: DatosVacaciones) {
         var iAno = miDato.strFecha1.substring(6, 10).toInt()
         val iMAxAno = FuncAux().strFechaCortaToCalendar(Calendar.getInstance()).substring(6, 10).toInt() + 1
-        var i = 0
 
         //
         // obtenemos los dias laborables
@@ -201,7 +197,6 @@ class FuncVacasPendientes {
     fun sumaVacasPendientes(miContexto: Context, miDato: DatosVacaciones) {
         var iAno = miDato.strFecha1.substring(6, 10).toInt()
         val iMAxAno = FuncAux().strFechaCortaToCalendar(Calendar.getInstance()).substring(6, 10).toInt() + 1
-        var i = 0
 
         //
         // obtenemos los dias laborables
