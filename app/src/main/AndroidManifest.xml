@@ -25,6 +25,10 @@
             android:name=".ui.festivos.Festivos"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.vacaciones.Vacaciones"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

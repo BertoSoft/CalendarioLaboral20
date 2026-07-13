@@ -117,6 +117,44 @@ class FuncVacaciones {
         return listaVacacionesOrdenada
     }
 
+    fun getDiasLaborables(miContexto: Context, miDato: DatosVacaciones): Int {
+        var iDiasLaborables = -1
+        val calFecha1 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha1)
+        val calFecha2 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha2)
+        var isFinSemana = false
+        var isFestivo = false
+
+        while (calFecha1 <= calFecha2){
+            val strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
+
+            if(
+                strFechaLarga.substring(0,4) == "sába" ||
+                strFechaLarga.substring(0,4) == "Satu" ||
+                strFechaLarga.substring(0,4) == "domi" ||
+                strFechaLarga.substring(0,4) == "Sund"
+            ){
+                isFinSemana = true
+            }
+            else{
+                isFestivo = FuncFestivos().isFestivo(miContexto, FuncAux().strFechaCortaToCalendar(calFecha1))
+            }
+
+            //
+            // Si noes festivo ni fin de semana es laborable
+            //
+            if(!isFinSemana && !isFestivo){
+                iDiasLaborables++
+            }
+
+            //
+            // Aumentamos un dia
+            //
+            calFecha1.add(Calendar.DAY_OF_MONTH, 1)
+        }
+        iDiasLaborables++
+        return iDiasLaborables
+    }
+
     fun setDatoVacaciones(miContexto: Context, miDato: DatosVacaciones): Boolean {
         val adminDb = AdminDb(miContexto, null)
         val sqlWrite = adminDb.writableDatabase
@@ -276,44 +314,6 @@ class FuncVacaciones {
         }
 
         return  listaVacacionesOrdenada
-    }
-
-    fun getDiasLaborables(miContexto: Context, miDato: DatosVacaciones): Int {
-        var iDiasLaborables = -1
-        val calFecha1 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha1)
-        val calFecha2 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha2)
-        var isFinSemana = false
-        var isFestivo = false
-
-        while (calFecha1 <= calFecha2){
-            val strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
-
-            if(
-                strFechaLarga.substring(0,4) == "sába" ||
-                strFechaLarga.substring(0,4) == "Satu" ||
-                strFechaLarga.substring(0,4) == "domi" ||
-                strFechaLarga.substring(0,4) == "Sund"
-                    ){
-                isFinSemana = true
-            }
-            else{
-                isFestivo = FuncFestivos().isFestivo(miContexto, FuncAux().strFechaCortaToCalendar(calFecha1))
-            }
-
-            //
-            // Si noes festivo ni fin de semana es laborable
-            //
-            if(!isFinSemana && !isFestivo){
-                iDiasLaborables++
-            }
-
-            //
-            // Aumentamos un dia
-            //
-            calFecha1.add(Calendar.DAY_OF_MONTH, 1)
-        }
-        iDiasLaborables++
-        return iDiasLaborables
     }
 
 }

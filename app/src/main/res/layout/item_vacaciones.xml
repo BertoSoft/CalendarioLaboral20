@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/backcolor"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvFecha11"
+            style="@style/TextosRcyclersView"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:gravity="start|center_vertical"
+            android:text=" Desde el "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvFecha12"
+            style="@style/TextosRcyclersView"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="end|center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvFecha21"
+            style="@style/TextosRcyclersView"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:gravity="start|center_vertical"
+            android:text=" Desde el "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFecha11" />
+
+        <TextView
+            android:id="@+id/tvFecha22"
+            style="@style/TextosRcyclersView"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="end|center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFecha12" />
+
+
+        <TextView
+            android:id="@+id/tvFecha31"
+            style="@style/TextosRcyclersView"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:gravity="start|center_vertical"
+            android:text=" Días en el periodo "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFecha21" />
+
+        <TextView
+            android:id="@+id/tvFecha32"
+            style="@style/TextosRcyclersView"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="end|center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFecha22" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

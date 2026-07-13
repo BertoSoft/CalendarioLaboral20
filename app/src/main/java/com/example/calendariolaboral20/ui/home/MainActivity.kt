@@ -12,6 +12,7 @@ import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncHome
 import com.example.calendariolaboral20.ui.festivos.Festivos
 import com.example.calendariolaboral20.ui.home.adapter.HomeAdapter
+import com.example.calendariolaboral20.ui.vacaciones.Vacaciones
 import java.util.Calendar
 
 //
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         when (datoMenuPrincipal.strTitulo) {
             "Salir" -> callSalirApp()
             "Festivos" -> callFestivos()
-            //"Vacaciones" -> funCallVacaciones()
+            "Vacaciones" -> callVacaciones()
             //"Resumen Exceso Jornadas" -> funExcesoJornadas()
             //"Calendario Laboral" -> funCalendarioLaboral()
             //"Backup" -> funBackup()
@@ -116,6 +117,12 @@ class MainActivity : AppCompatActivity() {
     //
     // Opciones del menu principal
     //
+
+    private fun callVacaciones() {
+        val intent = Intent(this, Vacaciones::class.java)
+        startActivity(intent)
+    }
+
     private fun callSalirApp(){
         closeApp(0)
     }
