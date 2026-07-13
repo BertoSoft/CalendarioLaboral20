@@ -1,6 +1,8 @@
 package com.example.calendariolaboral20.domain
 
 import android.content.Context
+import android.icu.util.Calendar
+import android.os.strictmode.CleartextNetworkViolation
 import com.example.calendariolaboral20.data.databases.AdminDb
 import com.example.calendariolaboral20.data.models.DatosCalendarFestivos
 import com.example.calendariolaboral20.data.models.DatosCalendarVacaciones
@@ -56,6 +58,65 @@ class FuncVacaciones {
         return id
     }
 
+    fun getDatoVacacionesById(miContexto: Context, id: Int): DatosVacaciones {
+        val adminDb = AdminDb(miContexto, null)
+        val sqlRead = adminDb.readableDatabase
+        val cVacaciones = sqlRead.rawQuery("SELECT *FROM Vacaciones", null)
+        val colId = cVacaciones.getColumnIndex("_id")
+        val colFecha1 = cVacaciones.getColumnIndex("Fecha1")
+        val colFecha2 = cVacaciones.getColumnIndex("Fecha2")
+        var datoVacaciones = DatosVacaciones("", "")
+
+        if (cVacaciones.moveToFirst()){
+            while (!cVacaciones.isAfterLast){
+                if(id == cVacaciones.getInt(colId)){
+                    datoVacaciones.strFecha1 = cVacaciones.getString(colFecha1)
+                    datoVacaciones.strFecha2 = cVacaciones.getString(colFecha2)
+                    cVacaciones.moveToLast()
+                }
+                cVacaciones.moveToNext()
+            }
+        }
+
+        cVacaciones.close()
+        sqlRead.close()
+        adminDb.close()
+
+        return datoVacaciones
+    }
+
+    fun getListaVacacionesAnuales(miContexto: Context, strAno: String): List<DatosVacaciones> {
+        val listaVacacionesAno = mutableListOf<DatosVacaciones>()
+        val adminDb = AdminDb(miContexto, null)
+        val sqlReadDb = adminDb.readableDatabase
+        val cVacaciones = sqlReadDb.rawQuery("SELECT *FROM Vacaciones", null)
+        val iColFecha1 = cVacaciones.getColumnIndex("Fecha1")
+        val iColFecha2 = cVacaciones.getColumnIndex("Fecha2")
+
+        if (cVacaciones.moveToFirst()) {
+            while (!cVacaciones.isAfterLast) {
+                val strFecha1Db = cVacaciones.getString(iColFecha1)
+                val strFecha2Db = cVacaciones.getString(iColFecha2)
+                val strAnoDb = strFecha1Db.substring(6)
+
+                if (strAnoDb == strAno) {
+                    listaVacacionesAno.add(DatosVacaciones(strFecha1Db, strFecha2Db))
+                }
+                cVacaciones.moveToNext()
+            }
+        }
+        cVacaciones.close()
+        sqlReadDb.close()
+        adminDb.close()
+
+        //
+        // Ordenamos la lista
+        //
+        val listaVacacionesOrdenada = ordenarListaVacaciones(listaVacacionesAno)
+
+        return listaVacacionesOrdenada
+    }
+
     fun setDatoVacaciones(miContexto: Context, miDato: DatosVacaciones): Boolean {
         val adminDb = AdminDb(miContexto, null)
         val sqlWrite = adminDb.writableDatabase
@@ -74,7 +135,7 @@ class FuncVacaciones {
             //
             // Restamos dias VacasPendientes
             //
-            //FuncVacasPendientes().restaVacasPendientes(miContexto, miDato)
+            FuncVacasPendientes().restaVacasPendientes(miContexto, miDato)
         }
 
         //
@@ -151,66 +212,32 @@ class FuncVacaciones {
         return false
     }
 
-    fun getDatoVacacionesById(miContexto: Context, id: Int): DatosVacaciones {
+    fun delDatoVacaciones(miContexto: Context, miDato: DatosVacaciones): Boolean {
+        val id = getIdVacacionesByDato(miContexto, miDato)
         val adminDb = AdminDb(miContexto, null)
-        val sqlRead = adminDb.readableDatabase
-        val cVacaciones = sqlRead.rawQuery("SELECT *FROM Vacaciones", null)
-        val colId = cVacaciones.getColumnIndex("_id")
-        val colFecha1 = cVacaciones.getColumnIndex("Fecha1")
-        val colFecha2 = cVacaciones.getColumnIndex("Fecha2")
-        var datoVacaciones = DatosVacaciones("", "")
+        val sqlWrite = adminDb.writableDatabase
 
-        if (cVacaciones.moveToFirst()){
-            while (!cVacaciones.isAfterLast){
-                if(id == cVacaciones.getInt(colId)){
-                    datoVacaciones.strFecha1 = cVacaciones.getString(colFecha1)
-                    datoVacaciones.strFecha2 = cVacaciones.getString(colFecha2)
-                    cVacaciones.moveToLast()
-                }
-                cVacaciones.moveToNext()
-            }
+        if(id < 0){
+            sqlWrite.close()
+            adminDb.close()
+            return false
         }
+        else{
+            val strSql = "DELETE FROM Vacaciones WHERE _id = $id"
 
-        cVacaciones.close()
-        sqlRead.close()
-        adminDb.close()
+            sqlWrite.execSQL(strSql)
+            sqlWrite.close()
+            adminDb.close()
 
-        return datoVacaciones
+            //
+            // Sumamos Dias a Vacaciones Pendientes
+            //
+            //FuncVacasPendientes().sumaVacasPendientes(miContexto, miDato)
+        }
+        return  true
     }
 
-    fun getListaVacacionesAnuales(miContexto: Context, strAno: String): List<DatosVacaciones> {
-        val listaVacacionesAno = mutableListOf<DatosVacaciones>()
-        val adminDb = AdminDb(miContexto, null)
-        val sqlReadDb = adminDb.readableDatabase
-        val cVacaciones = sqlReadDb.rawQuery("SELECT *FROM Vacaciones", null)
-        val iColFecha1 = cVacaciones.getColumnIndex("Fecha1")
-        val iColFecha2 = cVacaciones.getColumnIndex("Fecha2")
-
-        if (cVacaciones.moveToFirst()) {
-            while (!cVacaciones.isAfterLast) {
-                val strFecha1Db = cVacaciones.getString(iColFecha1)
-                val strFecha2Db = cVacaciones.getString(iColFecha2)
-                val strAnoDb = strFecha1Db.substring(6)
-
-                if (strAnoDb == strAno) {
-                    listaVacacionesAno.add(DatosVacaciones(strFecha1Db, strFecha2Db))
-                }
-                cVacaciones.moveToNext()
-            }
-        }
-        cVacaciones.close()
-        sqlReadDb.close()
-        adminDb.close()
-
-        //
-        // Ordenamos la lista
-        //
-        val listaVacacionesOrdenada = ordenarListaVacaciones(listaVacacionesAno)
-
-        return listaVacacionesOrdenada
-    }
-
-     fun ordenarListaVacaciones(listaVacacionesAno: List<DatosVacaciones>): List<DatosVacaciones> {
+    fun ordenarListaVacaciones(listaVacacionesAno: List<DatosVacaciones>): List<DatosVacaciones> {
         val listaVacacionesOrdenada = mutableListOf<DatosVacaciones>()
         val listaCalendar = mutableListOf<DatosCalendarVacaciones>()
 
@@ -251,28 +278,42 @@ class FuncVacaciones {
         return  listaVacacionesOrdenada
     }
 
-    fun delDatoVacaciones(miContexto: Context, miDato: DatosVacaciones): Boolean {
-        val id = getIdVacacionesByDato(miContexto, miDato)
-        val adminDb = AdminDb(miContexto, null)
-        val sqlWrite = adminDb.writableDatabase
+    fun getDiasLaborables(miContexto: Context, miDato: DatosVacaciones): Int {
+        var iDiasLaborables = -1
+        val calFecha1 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha1)
+        val calFecha2 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha2)
+        var isFinSemana = false
+        var isFestivo = false
 
-        if(id < 0){
-            sqlWrite.close()
-            adminDb.close()
-            return false
-        }
-        else{
-            val strSql = "DELETE FROM Vacaciones WHERE _id = $id"
+        while (calFecha1 <= calFecha2){
+            val strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
 
-            sqlWrite.execSQL(strSql)
-            sqlWrite.close()
-            adminDb.close()
+            if(
+                strFechaLarga.substring(0,4) == "sába" ||
+                strFechaLarga.substring(0,4) == "Satu" ||
+                strFechaLarga.substring(0,4) == "domi" ||
+                strFechaLarga.substring(0,4) == "Sund"
+                    ){
+                isFinSemana = true
+            }
+            else{
+                isFestivo = FuncFestivos().isFestivo(miContexto, FuncAux().strFechaCortaToCalendar(calFecha1))
+            }
 
             //
-            // Sumamos Dias a Vacaciones Pendientes
+            // Si noes festivo ni fin de semana es laborable
             //
-            //FuncVacasPendientes().sumaVacasPendientes(miContexto, miDato)
+            if(!isFinSemana && !isFestivo){
+                iDiasLaborables++
+            }
+
+            //
+            // Aumentamos un dia
+            //
+            calFecha1.add(Calendar.DAY_OF_MONTH, 1)
         }
-        return  true
+        iDiasLaborables++
+        return iDiasLaborables
     }
+
 }

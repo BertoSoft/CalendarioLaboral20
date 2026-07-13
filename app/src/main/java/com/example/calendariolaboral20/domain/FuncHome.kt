@@ -35,77 +35,6 @@ class FuncHome {
         }
     }
 
-    fun setPrimeraEjecucion(miContexto: Context): Boolean {
-
-        //
-        // Hacemos una consulta para que se creen todas las tablas
-        //
-        val datoCeroRegistro = getDatoRegistroById(miContexto, 0)
-
-        //
-        // Registramos el inicio de la App
-        //
-        val calFecha = Calendar.getInstance()
-        val strFecha = FuncAux().strFechaCortaToCalendar(calFecha)
-        val strHora = FuncAux().strHoraToCalendar(calFecha)
-
-        val isSetRegistro = setDatoRegistro(
-            miContexto,
-            DatosRegistro(
-                strFecha,
-                strHora
-            )
-        )
-
-        //
-        // Iniciamos la tabla VacasPendientes, si no esta iniciada
-        //
-        if(FuncVacasPendientes().isVacasPendientesVacia(miContexto)){
-            FuncVacasPendientes().initVacasPendientes(miContexto)
-        }
-        //
-        //Si se grabo el registro sin problemas devolvemos true
-        //
-
-        if(isSetRegistro){
-            return true
-        }
-        else{
-            return false
-        }
-    }
-
-    fun setDatoRegistro(miContexto: Context, miDato: DatosRegistro): Boolean {
-        val adminDb = AdminDb(miContexto, null)
-        val sqlWrite = adminDb.writableDatabase
-        val id = getIdRegistroByDato(miContexto, miDato)
-        var strSql: String? = null
-
-        //
-        // si id < 0 datos no existe, si existe id > 0
-        //
-        if (id < 0) {
-            strSql = "INSERT INTO Registro (Dia, " +
-                    "Hora) VALUES ('${miDato.strDia}'," +
-                    "'${miDato.strHora}');"
-        } else {
-            strSql = "UPDATE Registro SET Dia = '" +
-                    "${miDato.strDia}', Hora = '" +
-                    "${miDato.strHora}' WHERE _id = ${id};"
-        }
-
-        if (strSql != null) {
-            sqlWrite.execSQL(strSql)
-            sqlWrite.close()
-            adminDb.close()
-            return true
-        }
-
-        sqlWrite.close()
-        adminDb.close()
-        return false
-    }
-
     fun getIdRegistroByDato(miContexto: Context, miDato: DatosRegistro): Int {
         var id = -1
         val adminDb = AdminDb(miContexto, null)
@@ -198,4 +127,76 @@ class FuncHome {
 
         )
     }
+
+    fun setPrimeraEjecucion(miContexto: Context): Boolean {
+
+        //
+        // Hacemos una consulta para que se creen todas las tablas
+        //
+        val datoCeroRegistro = getDatoRegistroById(miContexto, 0)
+
+        //
+        // Registramos el inicio de la App
+        //
+        val calFecha = Calendar.getInstance()
+        val strFecha = FuncAux().strFechaCortaToCalendar(calFecha)
+        val strHora = FuncAux().strHoraToCalendar(calFecha)
+
+        val isSetRegistro = setDatoRegistro(
+            miContexto,
+            DatosRegistro(
+                strFecha,
+                strHora
+            )
+        )
+
+        //
+        // Iniciamos la tabla VacasPendientes, si no esta iniciada
+        //
+        if(FuncVacasPendientes().isVacasPendientesVacia(miContexto)){
+            FuncVacasPendientes().initVacasPendientes(miContexto)
+        }
+        //
+        //Si se grabo el registro sin problemas devolvemos true
+        //
+
+        if(isSetRegistro){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+
+    fun setDatoRegistro(miContexto: Context, miDato: DatosRegistro): Boolean {
+        val adminDb = AdminDb(miContexto, null)
+        val sqlWrite = adminDb.writableDatabase
+        val id = getIdRegistroByDato(miContexto, miDato)
+        var strSql: String? = null
+
+        //
+        // si id < 0 datos no existe, si existe id > 0
+        //
+        if (id < 0) {
+            strSql = "INSERT INTO Registro (Dia, " +
+                    "Hora) VALUES ('${miDato.strDia}'," +
+                    "'${miDato.strHora}');"
+        } else {
+            strSql = "UPDATE Registro SET Dia = '" +
+                    "${miDato.strDia}', Hora = '" +
+                    "${miDato.strHora}' WHERE _id = ${id};"
+        }
+
+        if (strSql != null) {
+            sqlWrite.execSQL(strSql)
+            sqlWrite.close()
+            adminDb.close()
+            return true
+        }
+
+        sqlWrite.close()
+        adminDb.close()
+        return false
+    }
+
 }

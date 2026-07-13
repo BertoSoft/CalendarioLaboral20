@@ -52,12 +52,12 @@ class FuncAux {
         return strFechaLarga
     }
 
-    fun strFechaCortaToCalendar(calFecha: Calendar): String?{
+    fun strFechaCortaToCalendar(calFecha: Calendar): String{
         val sdfCorta = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return  sdfCorta.format(calFecha.time)
     }
 
-    fun strHoraToCalendar(calFecha: Calendar): String?{
+    fun strHoraToCalendar(calFecha: Calendar): String{
         val sdfCorta = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         return  sdfCorta.format(calFecha.time)
     }

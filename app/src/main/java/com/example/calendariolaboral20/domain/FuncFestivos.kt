@@ -9,45 +9,17 @@ import com.example.calendariolaboral20.ui.festivos.Festivos
 
 class FuncFestivos {
 
-    fun ordenarListaFestivos(listaFestivos: List<DatosFestivos>): List<DatosFestivos>{
-        val listaFestivosOrdenada = mutableListOf<DatosFestivos>()
-        val listaCalendar = mutableListOf<DatosCalendarFestivos>()
-
-        //
-        // Creamos la lista Calendar
-        //
+    fun isFestivo(miContexto: Context, strFecha: String): Boolean{
+        val listaFestivos = getListaFestivosAnuales(miContexto, strFecha.substring(6, 10))
         var i = 0
+
         while (i < listaFestivos.size){
-            listaCalendar.add(
-                DatosCalendarFestivos(
-                    FuncAux().calFechaFromstrFechaCorta(listaFestivos[i].strDia),
-                    listaFestivos[i].strDia,
-                    listaFestivos[i].strTipo
-                )
-            )
+            if(listaFestivos[i].strDia == strFecha){
+                return true
+            }
             i++
         }
-
-        //
-        // Ordenamos la lista Calendar
-        //
-        val listaCalendarOrdenada = listaCalendar.sortedBy { it.calFecha }
-
-        //
-        // Creamos la lista Festivos Ordenada
-        //
-        i = 0
-        while (i < listaCalendarOrdenada.size){
-            listaFestivosOrdenada.add(
-                DatosFestivos(
-                    listaCalendarOrdenada[i].strFecha,
-                    listaCalendarOrdenada[i].strTipo
-                )
-            )
-            i++
-        }
-
-        return  listaFestivosOrdenada
+        return false
     }
 
     fun getDatoFestivosById(miContexto: Context, id: Int): DatosFestivos {
@@ -208,6 +180,47 @@ class FuncFestivos {
             adminDb.close()
         }
         return  true
+    }
+
+    fun ordenarListaFestivos(listaFestivos: List<DatosFestivos>): List<DatosFestivos>{
+        val listaFestivosOrdenada = mutableListOf<DatosFestivos>()
+        val listaCalendar = mutableListOf<DatosCalendarFestivos>()
+
+        //
+        // Creamos la lista Calendar
+        //
+        var i = 0
+        while (i < listaFestivos.size){
+            listaCalendar.add(
+                DatosCalendarFestivos(
+                    FuncAux().calFechaFromstrFechaCorta(listaFestivos[i].strDia),
+                    listaFestivos[i].strDia,
+                    listaFestivos[i].strTipo
+                )
+            )
+            i++
+        }
+
+        //
+        // Ordenamos la lista Calendar
+        //
+        val listaCalendarOrdenada = listaCalendar.sortedBy { it.calFecha }
+
+        //
+        // Creamos la lista Festivos Ordenada
+        //
+        i = 0
+        while (i < listaCalendarOrdenada.size){
+            listaFestivosOrdenada.add(
+                DatosFestivos(
+                    listaCalendarOrdenada[i].strFecha,
+                    listaCalendarOrdenada[i].strTipo
+                )
+            )
+            i++
+        }
+
+        return  listaFestivosOrdenada
     }
 
 }
