@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRv() {
         miAdapter = HomeAdapter(
-            FuncHome().getListaMenuPrincipal(this),
+            FuncHome().getListaMenuPrincipal(),
             {datoMenuPrincipal -> onClickLambda(datoMenuPrincipal) }
         )
 

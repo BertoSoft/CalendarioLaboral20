@@ -1,6 +1,7 @@
 package com.example.calendariolaboral20.ui.vacaciones
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +15,7 @@ import com.example.calendariolaboral20.data.models.DatosVacaciones
 import com.example.calendariolaboral20.databinding.ActivityVacacionesBinding
 import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncVacaciones
+import com.example.calendariolaboral20.ui.resvacas.ResVacas
 import com.example.calendariolaboral20.ui.vacaciones.adapter.VacacionesAdapter
 import java.util.Calendar
 
@@ -154,6 +156,12 @@ class Vacaciones : AppCompatActivity() {
             }
         }
 
+        //
+        // Pulsamos el ivResumen
+        //
+        binding.ivResumen.setOnClickListener {
+            callResumenVacaciones()
+        }
 
         //
         // Si se pulsa el boton eliminar
@@ -337,7 +345,7 @@ class Vacaciones : AppCompatActivity() {
             R.layout.item_sp,
             arrayAnos
         )
-        miAdaptadorSp.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
+        miAdaptadorSp.setDropDownViewResource(R.layout.item_sp)
         binding.spAno.adapter = miAdaptadorSp
         binding.spAno.setSelection(1)
 
@@ -358,5 +366,10 @@ class Vacaciones : AppCompatActivity() {
     private fun limpiaControles() {
         binding.tvFecha1.text = ""
         binding.tvFecha2.text = ""
+    }
+
+    private fun callResumenVacaciones(){
+        intent = Intent(this, ResVacas::class.java)
+        startActivity(intent)
     }
 }

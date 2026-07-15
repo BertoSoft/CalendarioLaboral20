@@ -2,9 +2,11 @@ package com.example.calendariolaboral20.domain
 
 import android.content.Context
 import android.icu.util.Calendar
+import androidx.annotation.IdRes
 import com.example.calendariolaboral20.data.databases.AdminDb
 import com.example.calendariolaboral20.data.models.DatosCalendarVacaciones
 import com.example.calendariolaboral20.data.models.DatosVacaciones
+import com.example.calendariolaboral20.ui.resvacas.ResVacas
 
 class FuncVacaciones {
 
@@ -331,6 +333,18 @@ class FuncVacaciones {
         }
 
         return  listaVacacionesOrdenada
+    }
+
+    fun getVacacionesDisfrutadas(miContexto: Context, strAno: String):Int {
+        var iDias = 0
+        val listaVacaciones = getListaVacacionesAnuales(miContexto, strAno)
+        var i = 0
+
+        while (i < listaVacaciones.size){
+            iDias += getDiasLaborables(miContexto, listaVacaciones[i])
+            i++
+        }
+        return iDias
     }
 
 }

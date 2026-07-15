@@ -20,7 +20,7 @@ class FuncVacasPendientes {
     fun initVacasPendientes(miContexto: Context) {
         val calFecha = Calendar.getInstance()
         val iMaxAno = calFecha.get(Calendar.YEAR) + 1
-        var iAno = 2022
+        var iAno = 2021
         var iVacaciones = 9
         var iError = 0
 
@@ -173,15 +173,27 @@ class FuncVacasPendientes {
 
     fun restaVacasPendientes(miContexto: Context, miDato: DatosVacaciones) {
         var iAno = miDato.strFecha1.substring(6, 10).toInt()
-        val iMAxAno = FuncAux().strFechaCortaToCalendar(Calendar.getInstance()).substring(6, 10).toInt() + 1
+        val iMAxAno = FuncAux().strFechaCortaToCalendar(Calendar.getInstance()).substring(6, 10).toInt()
 
         //
         // obtenemos los dias laborables
         //
         val iDiasLaborables = FuncVacaciones().getDiasLaborables(miContexto, miDato)
+
+        //
+        // Comenzando  la serie en el 2022 con 9 dias del 2021, hacemos toda la serie
+        //
+
+
+
+
+
+
         while (iAno <= iMAxAno){
-            val iDiasOld = getDiasPendientesByAno(miContexto, iAno.toString())
-            val iDias = iDiasOld - iDiasLaborables
+            var iAnoAnterior = iAno
+            iAnoAnterior--
+            val iDiasOld = getDiasPendientesByAno(miContexto, iAnoAnterior.toString())
+            val iDias = iDiasOld + 22 - iDiasLaborables
 
             setDatoVacasPendientes(
                 miContexto,
