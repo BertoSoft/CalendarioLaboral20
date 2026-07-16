@@ -102,16 +102,32 @@ class Festivos : AppCompatActivity() {
                     ){
 
                     //
+                    // Seleccinamos la fecha del datePicker
+                    //
+                    var calFechaDatePicker = Calendar.getInstance()
+
+                    if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                        calFechaDatePicker = calFecha
+                    }
+                    else{
+                        calFechaDatePicker.set(
+                            binding.spAno.selectedItem.toString().toInt(),
+                            0,
+                            1
+                        )
+                    }
+
+                    //
                     // Lanzamos el datepicker
                     //
-                    binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFecha)
-                    binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFecha)
+                    binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFechaDatePicker)
+                    binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFechaDatePicker)
                     DatePickerDialog(
                         binding.spFestivo.context,
                         setFechaListener,
-                        calFecha.get(Calendar.YEAR),
-                        calFecha.get(Calendar.MONTH),
-                        calFecha.get(Calendar.DAY_OF_MONTH)
+                        calFechaDatePicker.get(Calendar.YEAR),
+                        calFechaDatePicker.get(Calendar.MONTH),
+                        calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
                     ).show()
                     activaControles()
                 }
@@ -156,6 +172,18 @@ class Festivos : AppCompatActivity() {
         // Se pulsa en tvFecha
         //
         binding.tvFecha.setOnClickListener {
+            var calFechaDatePicker = Calendar.getInstance()
+
+            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                calFechaDatePicker = calFecha
+            }
+            else{
+                calFechaDatePicker.set(
+                    binding.spAno.selectedItem.toString().toInt(),
+                    0,
+                    1
+                )
+            }
 
             //
             // Si pinchamos en tvFecha, lanzamos el dialogo de selector de fecha
@@ -164,9 +192,9 @@ class Festivos : AppCompatActivity() {
                 DatePickerDialog(
                     binding.tvFecha.context,
                     setFechaListener,
-                    calFecha.get(Calendar.YEAR),
-                    calFecha.get(Calendar.MONTH),
-                    calFecha.get(Calendar.DAY_OF_MONTH)
+                    calFechaDatePicker.get(Calendar.YEAR),
+                    calFechaDatePicker.get(Calendar.MONTH),
+                    calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
                 ).show()
 
             }

@@ -72,12 +72,24 @@ class Vacaciones : AppCompatActivity() {
         // Se pulsa en tvFecha1, cuando esta activo
         //
         binding.tvFecha1.setOnClickListener {
+            var calFechaDatePicker = Calendar.getInstance()
+
+            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                calFechaDatePicker = calFecha
+            }
+            else{
+                calFechaDatePicker.set(
+                    binding.spAno.selectedItem.toString().toInt(),
+                    0,
+                    1
+                )
+            }
             val miDialogoCalendario1 = DatePickerDialog(
                 binding.tvFecha1.context,
                 setFechaListener1,
-                calFecha1.get(Calendar.YEAR),
-                calFecha1.get(Calendar.MONTH),
-                calFecha1.get(Calendar.DAY_OF_MONTH)
+                calFechaDatePicker.get(Calendar.YEAR),
+                calFechaDatePicker.get(Calendar.MONTH),
+                calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
             )
             miDialogoCalendario1.setTitle("Fecha Inicio Vacaciones ...")
             miDialogoCalendario1.show()
@@ -87,12 +99,24 @@ class Vacaciones : AppCompatActivity() {
         // Se pulsa en tvFecha2, cuando esta activo
         //
         binding.tvFecha2.setOnClickListener {
+            var calFechaDatePicker = Calendar.getInstance()
+
+            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                calFechaDatePicker = calFecha
+            }
+            else{
+                calFechaDatePicker.set(
+                    binding.spAno.selectedItem.toString().toInt(),
+                    0,
+                    1
+                )
+            }
             val miDialogoCalendario2 = DatePickerDialog(
                 binding.tvFecha2.context,
                 setFechaListener2,
-                calFecha2.get(Calendar.YEAR),
-                calFecha2.get(Calendar.MONTH),
-                calFecha2.get(Calendar.DAY_OF_MONTH)
+                calFechaDatePicker.get(Calendar.YEAR),
+                calFechaDatePicker.get(Calendar.MONTH),
+                calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
             )
             miDialogoCalendario2.setTitle("Fecha Final Vacaciones ...")
             miDialogoCalendario2.show()
@@ -102,6 +126,18 @@ class Vacaciones : AppCompatActivity() {
         // Se Pulsa el Boton +
         //
         binding.ivSumar.setOnClickListener {
+            var calFechaDatePicker = Calendar.getInstance()
+
+            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                calFechaDatePicker = calFecha
+            }
+            else{
+                calFechaDatePicker.set(
+                    binding.spAno.selectedItem.toString().toInt(),
+                    0,
+                    1
+                )
+            }
             binding.ivEliminar.isVisible = false
             limpiaControles()
             activaControles()
@@ -112,9 +148,9 @@ class Vacaciones : AppCompatActivity() {
             val miDatePickerDialogo1 = DatePickerDialog(
                 binding.ivSumar.context,
                 setFechaListener1,
-                calFecha1.get(Calendar.YEAR),
-                calFecha1.get(Calendar.MONTH),
-                calFecha1.get(Calendar.DAY_OF_MONTH)
+                calFechaDatePicker.get(Calendar.YEAR),
+                calFechaDatePicker.get(Calendar.MONTH),
+                calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
             )
             miDatePickerDialogo1.setTitle("Fecha Inicio Vacaciones ...")
             miDatePickerDialogo1.show()
@@ -124,6 +160,18 @@ class Vacaciones : AppCompatActivity() {
             //
             miDatePickerDialogo1.setOnDismissListener {
                 if (binding.tvFecha1.text != "") {
+                    var calFechaDatePicker = Calendar.getInstance()
+
+                    if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
+                        calFechaDatePicker = calFecha
+                    }
+                    else{
+                        calFechaDatePicker.set(
+                            binding.spAno.selectedItem.toString().toInt(),
+                            0,
+                            1
+                        )
+                    }
 
                     //
                     // Lanzamos el calendario final de vacaciobnes
@@ -131,9 +179,9 @@ class Vacaciones : AppCompatActivity() {
                     val miDatePickerDialogo2 = DatePickerDialog(
                         binding.ivSumar.context,
                         setFechaListener2,
-                        calFecha2.get(Calendar.YEAR),
-                        calFecha2.get(Calendar.MONTH),
-                        calFecha2.get(Calendar.DAY_OF_MONTH)
+                        calFechaDatePicker.get(Calendar.YEAR),
+                        calFechaDatePicker.get(Calendar.MONTH),
+                        calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
                     )
                     miDatePickerDialogo2.setTitle("Fecha Final Vacaciones ...")
                     miDatePickerDialogo2.show()
@@ -300,7 +348,13 @@ class Vacaciones : AppCompatActivity() {
                 "Periodo de Vacaciones guardado con exito...",
                 Toast.LENGTH_SHORT
             ).show()
-            initUi()
+            miAdaptador.funRefrescaLista(FuncVacaciones().getListaVacacionesAnuales(
+                this,
+                binding.spAno.selectedItem.toString()
+            ))
+            limpiaControles()
+            desactivaControles()
+            binding.ivEliminar.isVisible = false
         }
 
 

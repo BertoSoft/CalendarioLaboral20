@@ -110,10 +110,10 @@ class FuncVacaciones {
     }
 
     fun getDiasLaborables(miContexto: Context, miDato: DatosVacaciones): Int {
-        var iDiasLaborables = -1
+        var iDiasLaborables = 0
         val calFecha1 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha1)
         val calFecha2 = FuncAux().calFechaFromstrFechaCorta(miDato.strFecha2)
-        val strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
+        var strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
         var isFinSemana = false
         var isFestivo = false
 
@@ -134,7 +134,7 @@ class FuncVacaciones {
             // Si no es festivo ni fin de semana es laborable
             //
             if(!isFinSemana && !isFestivo){
-                iDiasLaborables++
+                return 1
             }
         }
         else{
@@ -161,7 +161,11 @@ class FuncVacaciones {
                 //
                 // Aumentamos un dia
                 //
+
+                val tmp = FuncAux().strFechaCortaToCalendar(calFecha1)
+
                 calFecha1.add(Calendar.DAY_OF_MONTH, 1)
+                strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
                 isFestivo = false
                 isFinSemana = false
             }
