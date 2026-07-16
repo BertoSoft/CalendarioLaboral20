@@ -10,6 +10,8 @@ import com.example.calendariolaboral20.data.models.DatosRegistro
 import com.example.calendariolaboral20.databinding.ActivityMainBinding
 import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncHome
+import com.example.calendariolaboral20.ui.backup.Backup
+import com.example.calendariolaboral20.ui.excesojornada.ExcesoJornada
 import com.example.calendariolaboral20.ui.festivos.Festivos
 import com.example.calendariolaboral20.ui.home.adapter.HomeAdapter
 import com.example.calendariolaboral20.ui.vacaciones.Vacaciones
@@ -108,15 +110,24 @@ class MainActivity : AppCompatActivity() {
             "Salir" -> callSalirApp()
             "Festivos" -> callFestivos()
             "Vacaciones" -> callVacaciones()
-            //"Resumen Exceso Jornadas" -> funExcesoJornadas()
+            "Exceso Jornadas" -> callExcesoJornadas()
             //"Calendario Laboral" -> funCalendarioLaboral()
-            //"Backup" -> funBackup()
+            "Backup" -> callBackup()
         }
     }
 
     //
     // Opciones del menu principal
     //
+    private fun callBackup(){
+        val intent = Intent(this, Backup::class.java)
+        startActivity(intent)
+    }
+
+    private fun callExcesoJornadas(){
+        val intent = Intent(this, ExcesoJornada::class.java)
+        startActivity(intent)
+    }
 
     private fun callVacaciones() {
         val intent = Intent(this, Vacaciones::class.java)

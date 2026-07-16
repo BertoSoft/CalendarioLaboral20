@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/svPrincipal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.excesosjornada.ExcesoJornada">
+
+        <!--Texto Titulo -->
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/TextosTitulos"
+            android:text="Excesos de Jornada"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!--Spinner Anos -->
+        <Spinner
+            android:id="@+id/spAno"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            style="@style/TextosSp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!--Texto tv11 -->
+        <TextView
+            android:id="@+id/tv11"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:text="Sábados"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv12 -->
+        <TextView
+            android:id="@+id/tv12"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="52"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/spAno"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Texto tv21 -->
+        <TextView
+            android:id="@+id/tv21"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:text="Domingos"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv11"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv22 -->
+        <TextView
+            android:id="@+id/tv22"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="52"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv12"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Texto tv31 -->
+        <TextView
+            android:id="@+id/tv31"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:text="Festivos Nacionales"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv21"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv32 -->
+        <TextView
+            android:id="@+id/tv32"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="8"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv22"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Texto tv41 -->
+        <TextView
+            android:id="@+id/tv41"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:text="Festivos Autonomicos"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv31"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv42 -->
+        <TextView
+            android:id="@+id/tv42"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="2"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv32"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Texto tv51 -->
+        <TextView
+            android:id="@+id/tv51"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:text="Festivos Locales"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv41"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv52 -->
+        <TextView
+            android:id="@+id/tv52"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="2"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv42"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Texto tv61 -->
+        <TextView
+            android:id="@+id/tv61"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos16Negro"
+            android:text="Convenio(Sta Bárbara)"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv51"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!--Texto tv62 -->
+        <TextView
+            android:id="@+id/tv62"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negro"
+            android:text="1"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tv52"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!--Linea1 -->
+        <ImageView
+            android:id="@+id/linea1"
+            android:layout_width="match_parent"
+            android:background="@color/black"
+            android:layout_height="1dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv61"/>
+
+        <!--Texto 7 -->
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos18Negro"
+            android:text="(365-52-52-8-2-2-1) x 8 h. = 1984 h."
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linea1"/>
+
+        <!--Texto 8 -->
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos18Negro"
+            android:text="Vacaciones (22 Días x 8 h.)= 176 h."
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv7"/>
+
+        <!--Texto 9 -->
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos18Negro"
+            android:text="1984 h. - 176 h.Vacaciones = 1808 h."
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv8"/>
+
+        <!--Texto 10 -->
+        <TextView
+            android:id="@+id/tv10"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            style="@style/Textos18Negro"
+            android:text="1808 h. - 1752 h. = 56 h."
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv9"/>
+
+        <!--Linea2 -->
+        <ImageView
+            android:id="@+id/linea2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv10"/>
+
+        <!--Texto Final -->
+        <TextView
+            android:id="@+id/tvFinal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            style="@style/Textos18Negrita"
+            android:text="(56 h. / 8 h.) = 7 Días Exceso Jornada"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linea2"/>
+
+        <!--Linea3 -->
+        <ImageView
+            android:id="@+id/linea3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFinal"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
