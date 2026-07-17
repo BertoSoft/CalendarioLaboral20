@@ -183,25 +183,28 @@ class FuncVacasPendientes {
         //
         // Comenzando  la serie en el 2022 con 9 dias del 2021, hacemos toda la serie
         //
+        var numeroPaso = 1
         while (iAno <= iMAxAno){
-            val iDiasOld = getDiasPendientesByAno(miContexto, iAno.toString())
-            val iDias = iDiasOld - iDiasLaborables
-
-
-
-
-
-
+            var iAnoAnterior = iAno
+            iAnoAnterior--
+            val iDiasOldAnoAnterior = getDiasPendientesByAno(miContexto, iAnoAnterior.toString())
+            val iDiasOldAnoCurso = getDiasPendientesByAno(miContexto, iAno.toString())
+            val iDiasDisfrutados = FuncVacaciones().getVacacionesDisfrutadas(miContexto, iAno.toString())
+            var iDias = 0
 
             //
-            // Aqui esta el error, tengo que saber los dias que hay grabados y restar 1
+            // Si es el primer año calculo, si ya no es el primer año solo sumo
             //
+            if(numeroPaso == 1){
+                iDias = iDiasOldAnoAnterior + 22 - iDiasLaborables - iDiasDisfrutados
+            }
 
-
-
-
-
-
+            //
+            // ya no es el primer paso
+            //
+            else {
+                iDias = iDiasOldAnoCurso - iDiasLaborables
+            }
 
             setDatoVacasPendientes(
                 miContexto,
@@ -211,6 +214,7 @@ class FuncVacasPendientes {
                 )
             )
             iAno++
+            numeroPaso++
         }
     }
 
@@ -222,9 +226,47 @@ class FuncVacasPendientes {
         // obtenemos los dias laborables
         //
         val iDiasLaborables = FuncVacaciones().getDiasLaborables(miContexto, miDato)
+        var numeroPaso = 1
         while (iAno <= iMAxAno){
-            val iDiasOld = getDiasPendientesByAno(miContexto, iAno.toString())
-            val iDias = iDiasOld + iDiasLaborables
+            val iAnoAnterior = iAno--
+            val iDiasOld = getDiasPendientesByAno(miContexto, iAnoAnterior.toString())
+            val iDiasDisfrutados = FuncVacaciones().getVacacionesDisfrutadas(miContexto, iAno.toString())
+            val iDias = iDiasOld + 22 + iDiasLaborables - iDiasDisfrutados
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if(numeroPaso == 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             setDatoVacasPendientes(
                 miContexto,
@@ -234,6 +276,7 @@ class FuncVacasPendientes {
                 )
             )
             iAno++
+            numeroPaso++
         }
     }
 
