@@ -46,7 +46,7 @@ class FuncExcesoJornada {
         )
         var iContador = 0
         while (iContador < listadoFestivos.size){
-            if(listadoFestivos[iContador].strTipo == "Nacional"){
+            if(listadoFestivos[iContador].strTipo == "Nacionales"){
                 iFestivosNacionales++
             }
             iContador++

@@ -160,18 +160,6 @@ class Vacaciones : AppCompatActivity() {
             //
             miDatePickerDialogo1.setOnDismissListener {
                 if (binding.tvFecha1.text != "") {
-                    var calFechaDatePicker = Calendar.getInstance()
-
-                    if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                        calFechaDatePicker = calFecha
-                    }
-                    else{
-                        calFechaDatePicker.set(
-                            binding.spAno.selectedItem.toString().toInt(),
-                            0,
-                            1
-                        )
-                    }
 
                     //
                     // Lanzamos el calendario final de vacaciobnes

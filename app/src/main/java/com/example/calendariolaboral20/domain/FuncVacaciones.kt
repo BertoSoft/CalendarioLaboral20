@@ -138,7 +138,7 @@ class FuncVacaciones {
             }
         }
         else{
-            while (calFecha1 < calFecha2){
+            while (calFecha1 <= calFecha2){
                 if(
                     strFechaLarga.substring(0,4) == "sába" ||
                     strFechaLarga.substring(0,4) == "Satu" ||
@@ -161,9 +161,6 @@ class FuncVacaciones {
                 //
                 // Aumentamos un dia
                 //
-
-                val tmp = FuncAux().strFechaCortaToCalendar(calFecha1)
-
                 calFecha1.add(Calendar.DAY_OF_MONTH, 1)
                 strFechaLarga = FuncAux().strFechaLargaFromCalendar(calFecha1)
                 isFestivo = false
@@ -171,10 +168,7 @@ class FuncVacaciones {
             }
         }
 
-        //
-        // Aumentamo un dia porque elcontador empieza e -1
-        //
-        iDiasLaborables++
+
         return iDiasLaborables
     }
 

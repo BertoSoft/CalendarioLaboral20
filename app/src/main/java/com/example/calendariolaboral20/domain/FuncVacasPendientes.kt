@@ -183,17 +183,25 @@ class FuncVacasPendientes {
         //
         // Comenzando  la serie en el 2022 con 9 dias del 2021, hacemos toda la serie
         //
-
-
-
-
-
-
         while (iAno <= iMAxAno){
-            var iAnoAnterior = iAno
-            iAnoAnterior--
-            val iDiasOld = getDiasPendientesByAno(miContexto, iAnoAnterior.toString())
-            val iDias = iDiasOld + 22 - iDiasLaborables
+            val iDiasOld = getDiasPendientesByAno(miContexto, iAno.toString())
+            val iDias = iDiasOld - iDiasLaborables
+
+
+
+
+
+
+
+            //
+            // Aqui esta el error, tengo que saber los dias que hay grabados y restar 1
+            //
+
+
+
+
+
+
 
             setDatoVacasPendientes(
                 miContexto,
