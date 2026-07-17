@@ -122,9 +122,10 @@ class ResVacas : AppCompatActivity() {
         binding.tv12.text = "0"
         while (i < listaVacasPendientes.size){
             var iAno = binding.spAno.selectedItem.toString().toInt()
-            iAno--
+            var iAnoAnterior = iAno
+            iAnoAnterior--
 
-            if(listaVacasPendientes[i].strYear == iAno.toString()){
+            if(listaVacasPendientes[i].strYear == iAnoAnterior.toString()){
                 binding.tv12.text = listaVacasPendientes[i].strDias
                 i = listaVacasPendientes.size
             }

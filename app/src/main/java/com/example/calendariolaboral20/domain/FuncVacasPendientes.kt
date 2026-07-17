@@ -226,47 +226,9 @@ class FuncVacasPendientes {
         // obtenemos los dias laborables
         //
         val iDiasLaborables = FuncVacaciones().getDiasLaborables(miContexto, miDato)
-        var numeroPaso = 1
         while (iAno <= iMAxAno){
-            val iAnoAnterior = iAno--
-            val iDiasOld = getDiasPendientesByAno(miContexto, iAnoAnterior.toString())
-            val iDiasDisfrutados = FuncVacaciones().getVacacionesDisfrutadas(miContexto, iAno.toString())
-            val iDias = iDiasOld + 22 + iDiasLaborables - iDiasDisfrutados
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if(numeroPaso == 1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            val iDiasOldAnoCurso = getDiasPendientesByAno(miContexto, iAno.toString())
+            val iDias = iDiasOldAnoCurso + iDiasLaborables
 
             setDatoVacasPendientes(
                 miContexto,
@@ -276,7 +238,6 @@ class FuncVacasPendientes {
                 )
             )
             iAno++
-            numeroPaso++
         }
     }
 
