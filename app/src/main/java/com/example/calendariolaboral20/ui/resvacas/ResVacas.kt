@@ -138,6 +138,9 @@ class ResVacas : AppCompatActivity() {
         var array = arrayOf<String>()
         var iAnoActual = Calendar.getInstance().get(Calendar.YEAR)
 
+        //
+        // Obtengo una lista desde el año siguiente al actual hasta 2022
+        //
         iAnoActual++
         while (iAnoActual >= 2022){
             array += iAnoActual.toString()
@@ -151,8 +154,27 @@ class ResVacas : AppCompatActivity() {
         )
         adaptadorSpinner.setDropDownViewResource(R.layout.item_sp)
         binding.spAno.adapter = adaptadorSpinner
-        binding.spAno.setSelection(1)
 
+        //
+        // Segun el putExtra que nos viene de Vacaciones, seleccionamos el año
+        //
+        var iAnoBuscado = intent.getIntExtra("EXTRA_ANO", -1)
+        var iAno = Calendar.getInstance().get(Calendar.YEAR)
+
+        if(iAnoBuscado < 0){
+            binding.spAno.setSelection(1)
+        }
+        else{
+            iAno++
+            var iSeleccion = 0
+            while (iAno >= 2022){
+                if(iAno == iAnoBuscado){
+                    binding.spAno.setSelection(iSeleccion)
+                    iAno = 2022
+                }
+                iAno--
+                iSeleccion++
+            }
+        }
     }
-
 }

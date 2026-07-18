@@ -6,13 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/backcolor">
 
+    <ImageView
+        android:id="@+id/ivLogoErimsa"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:src="@drawable/logo_erimsa"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMenuPrincipal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/ivLogoErimsa" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="primario">#FF5722</color>
+    <color name="primario">#F63D03</color>
     <color name="secundario">#673AB7</color>
     <color name="forecolor">@color/black</color>
     <color name="backcolor">#FCECC0</color>

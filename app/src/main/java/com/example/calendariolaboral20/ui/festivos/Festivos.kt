@@ -106,16 +106,11 @@ class Festivos : AppCompatActivity() {
                     //
                     var calFechaDatePicker = Calendar.getInstance()
 
-                    if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                        calFechaDatePicker = calFecha
-                    }
-                    else{
-                        calFechaDatePicker.set(
-                            binding.spAno.selectedItem.toString().toInt(),
-                            0,
-                            1
-                        )
-                    }
+                    calFechaDatePicker.set(
+                        binding.spAno.selectedItem.toString().toInt(),
+                        calFecha.get(Calendar.MONTH),
+                        calFecha.get(Calendar.DAY_OF_MONTH)
+                    )
 
                     //
                     // Lanzamos el datepicker
@@ -172,31 +167,23 @@ class Festivos : AppCompatActivity() {
         // Se pulsa en tvFecha
         //
         binding.tvFecha.setOnClickListener {
-            var calFechaDatePicker = Calendar.getInstance()
-
-            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                calFechaDatePicker = calFecha
-            }
-            else{
-                calFechaDatePicker.set(
-                    binding.spAno.selectedItem.toString().toInt(),
-                    0,
-                    1
-                )
-            }
 
             //
             // Si pinchamos en tvFecha, lanzamos el dialogo de selector de fecha
             //
             if(binding.tvFecha.text != ""){
+                val iDia = binding.tvFecha.tag.toString().substring(0, 2).toInt()
+                var iMes = binding.tvFecha.tag.toString().substring(3, 5).toInt()
+                iMes--
+                val iAno = binding.tvFecha.tag.toString().substring(6, 10).toInt()
+
                 DatePickerDialog(
                     binding.tvFecha.context,
                     setFechaListener,
-                    calFechaDatePicker.get(Calendar.YEAR),
-                    calFechaDatePicker.get(Calendar.MONTH),
-                    calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
+                    iAno,
+                    iMes,
+                    iDia
                 ).show()
-
             }
         }
 

@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://ss.chemaandroid.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.calendariolaboral.CalendarioLaboral">
+
+        <!-- linea de spinner -->
+        <Spinner
+            android:id="@+id/spMes"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            style="@style/TextosSp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Spinner
+            android:id="@+id/spAno"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            style="@style/TextosSp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Linea de iniciales de los dias -->
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="L"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="M"
+            app:layout_constraintStart_toEndOf="@id/tv01"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv03"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="M"
+            app:layout_constraintStart_toEndOf="@id/tv02"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv04"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="J"
+            app:layout_constraintStart_toEndOf="@id/tv03"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv05"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="V"
+            app:layout_constraintStart_toEndOf="@id/tv04"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv06"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="S"
+            app:layout_constraintStart_toEndOf="@id/tv05"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <TextView
+            android:id="@+id/tv07"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            style="@style/Textos20Negrita"
+            android:gravity="center"
+            android:text="D"
+            app:layout_constraintStart_toEndOf="@id/tv06"
+            app:layout_constraintTop_toBottomOf="@id/spMes"/>
+
+        <!-- Linea de la primera semana ...-->
+        <TextView
+            android:id="@+id/tv11"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv01"/>
+
+        <TextView
+            android:id="@+id/tv12"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv11"
+            app:layout_constraintTop_toBottomOf="@id/tv01"/>
+
+        <TextView
+            android:id="@+id/tv13"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv12"
+            app:layout_constraintTop_toBottomOf="@id/tv02"/>
+
+        <TextView
+            android:id="@+id/tv14"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv13"
+            app:layout_constraintTop_toBottomOf="@id/tv03"/>
+
+        <TextView
+            android:id="@+id/tv15"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv14"
+            app:layout_constraintTop_toBottomOf="@id/tv04"/>
+
+        <TextView
+            android:id="@+id/tv16"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv15"
+            app:layout_constraintTop_toBottomOf="@id/tv05"/>
+
+        <TextView
+            android:id="@+id/tv17"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv16"
+            app:layout_constraintTop_toBottomOf="@id/tv06"/>
+
+
+        <!-- Linea de la segunda semana ...-->
+        <TextView
+            android:id="@+id/tv21"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv11"/>
+
+        <TextView
+            android:id="@+id/tv22"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv21"
+            app:layout_constraintTop_toBottomOf="@id/tv11"/>
+
+        <TextView
+            android:id="@+id/tv23"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv22"
+            app:layout_constraintTop_toBottomOf="@id/tv12"/>
+
+        <TextView
+            android:id="@+id/tv24"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv23"
+            app:layout_constraintTop_toBottomOf="@id/tv13"/>
+
+        <TextView
+            android:id="@+id/tv25"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv24"
+            app:layout_constraintTop_toBottomOf="@id/tv14"/>
+
+        <TextView
+            android:id="@+id/tv26"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv25"
+            app:layout_constraintTop_toBottomOf="@id/tv15"/>
+
+        <TextView
+            android:id="@+id/tv27"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv26"
+            app:layout_constraintTop_toBottomOf="@id/tv16"/>
+
+
+        <!-- Linea de la tercera semana ...-->
+        <TextView
+            android:id="@+id/tv31"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv21"/>
+
+        <TextView
+            android:id="@+id/tv32"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv31"
+            app:layout_constraintTop_toBottomOf="@id/tv21"/>
+
+        <TextView
+            android:id="@+id/tv33"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv32"
+            app:layout_constraintTop_toBottomOf="@id/tv22"/>
+
+        <TextView
+            android:id="@+id/tv34"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv33"
+            app:layout_constraintTop_toBottomOf="@id/tv23"/>
+
+        <TextView
+            android:id="@+id/tv35"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv34"
+            app:layout_constraintTop_toBottomOf="@id/tv24"/>
+
+        <TextView
+            android:id="@+id/tv36"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv35"
+            app:layout_constraintTop_toBottomOf="@id/tv25"/>
+
+        <TextView
+            android:id="@+id/tv37"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv36"
+            app:layout_constraintTop_toBottomOf="@id/tv26"/>
+
+        <!-- Linea de la cuarta semana ...-->
+        <TextView
+            android:id="@+id/tv41"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv31"/>
+
+        <TextView
+            android:id="@+id/tv42"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv41"
+            app:layout_constraintTop_toBottomOf="@id/tv32"/>
+
+        <TextView
+            android:id="@+id/tv43"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv42"
+            app:layout_constraintTop_toBottomOf="@id/tv32"/>
+
+        <TextView
+            android:id="@+id/tv44"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv43"
+            app:layout_constraintTop_toBottomOf="@id/tv33"/>
+
+        <TextView
+            android:id="@+id/tv45"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv44"
+            app:layout_constraintTop_toBottomOf="@id/tv34"/>
+
+        <TextView
+            android:id="@+id/tv46"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv45"
+            app:layout_constraintTop_toBottomOf="@id/tv35"/>
+
+        <TextView
+            android:id="@+id/tv47"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv46"
+            app:layout_constraintTop_toBottomOf="@id/tv36"/>
+
+        <!-- Linea de la quinta semana ...-->
+        <TextView
+            android:id="@+id/tv51"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv41"/>
+
+        <TextView
+            android:id="@+id/tv52"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv51"
+            app:layout_constraintTop_toBottomOf="@id/tv42"/>
+
+        <TextView
+            android:id="@+id/tv53"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv52"
+            app:layout_constraintTop_toBottomOf="@id/tv42"/>
+
+        <TextView
+            android:id="@+id/tv54"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv53"
+            app:layout_constraintTop_toBottomOf="@id/tv43"/>
+
+        <TextView
+            android:id="@+id/tv55"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv54"
+            app:layout_constraintTop_toBottomOf="@id/tv44"/>
+
+        <TextView
+            android:id="@+id/tv56"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv55"
+            app:layout_constraintTop_toBottomOf="@id/tv45"/>
+
+        <TextView
+            android:id="@+id/tv57"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv56"
+            app:layout_constraintTop_toBottomOf="@id/tv46"/>
+
+        <!-- Linea de la sexta semana ...-->
+        <TextView
+            android:id="@+id/tv61"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv51"/>
+
+        <TextView
+            android:id="@+id/tv62"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv61"
+            app:layout_constraintTop_toBottomOf="@id/tv52"/>
+
+        <TextView
+            android:id="@+id/tv63"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv62"
+            app:layout_constraintTop_toBottomOf="@id/tv52"/>
+
+        <TextView
+            android:id="@+id/tv64"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv63"
+            app:layout_constraintTop_toBottomOf="@id/tv53"/>
+
+        <TextView
+            android:id="@+id/tv65"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv64"
+            app:layout_constraintTop_toBottomOf="@id/tv54"/>
+
+        <TextView
+            android:id="@+id/tv66"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv65"
+            app:layout_constraintTop_toBottomOf="@id/tv55"/>
+
+        <TextView
+            android:id="@+id/tv67"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Textos18Negro"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv66"
+            app:layout_constraintTop_toBottomOf="@id/tv56"/>
+
+        <!-- Linea 1 -->
+        <ImageView
+            android:id="@+id/linea1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv61"/>
+
+        <!-- Cajas texto leyendas  nacional-->
+        <TextView
+            android:id="@+id/tvNacionales"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Nacionales"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/linea1"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAzul"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/azul_claro"
+            app:layout_constraintTop_toBottomOf="@id/linea1"
+            app:layout_constraintStart_toEndOf="@id/tvNacionales"/>
+
+        <!-- Cajas texto leyendas  Autonomico-->
+        <TextView
+            android:id="@+id/tvAutonomico"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Autonomico"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/linea1"
+            app:layout_constraintStart_toEndOf="@id/tvAzul"/>
+
+        <TextView
+            android:id="@+id/tvAzulOscuro"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/azul_oscuro"
+            app:layout_constraintTop_toBottomOf="@id/linea1"
+            app:layout_constraintStart_toEndOf="@id/tvAutonomico"/>
+
+        <!-- Cajas texto leyendas  Locales-->
+        <TextView
+            android:id="@+id/tvLocales"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Locales"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvNacionales"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAmarillo"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/amarillo_oscuro"
+            app:layout_constraintTop_toBottomOf="@id/tvAzul"
+            app:layout_constraintStart_toEndOf="@id/tvNacionales"/>
+
+        <!-- Cajas texto leyendas  Exceso Jornada-->
+        <TextView
+            android:id="@+id/tvExcesos"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Excesos Jornada"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvAutonomico"
+            app:layout_constraintStart_toEndOf="@id/tvAzul"/>
+
+        <TextView
+            android:id="@+id/tvVioleta"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/violeta"
+            app:layout_constraintTop_toBottomOf="@id/tvAzulOscuro"
+            app:layout_constraintStart_toEndOf="@id/tvAutonomico"/>
+
+        <!-- Cajas texto leyendas  Convenio-->
+        <TextView
+            android:id="@+id/tvConvenio"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Convenio"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLocales"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvNaranja"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/rojo"
+            app:layout_constraintTop_toBottomOf="@id/tvAmarillo"
+            app:layout_constraintStart_toEndOf="@id/tvNacionales"/>
+
+        <!-- Cajas texto leyendas Vacaciones-->
+        <TextView
+            android:id="@+id/tvVacaciones"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            style="@style/Textos16Negrita"
+            android:text="Vacaciones"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvExcesos"
+            app:layout_constraintStart_toEndOf="@id/tvAzul"/>
+
+        <TextView
+            android:id="@+id/tvVerde"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gris_oscuro"
+            app:layout_constraintTop_toBottomOf="@id/tvVioleta"
+            app:layout_constraintStart_toEndOf="@id/tvAutonomico"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

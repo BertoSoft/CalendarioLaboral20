@@ -477,7 +477,12 @@ class Vacaciones : AppCompatActivity() {
     }
 
     private fun callResumenVacaciones(){
-        intent = Intent(this, ResVacas::class.java)
+
+        intent = Intent(this, ResVacas::class.java).apply {
+            putExtra("EXTRA_ANO", binding.spAno.selectedItem.toString().toInt())
+        }
+
         startActivity(intent)
     }
+
 }

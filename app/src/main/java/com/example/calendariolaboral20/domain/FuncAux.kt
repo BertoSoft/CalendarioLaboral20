@@ -60,4 +60,36 @@ class FuncAux {
         val sdfCorta = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         return  sdfCorta.format(calFecha.time)
     }
+
+    fun iMesTostrMes(strMes: String): Int {
+        var iMes = -1
+        when (strMes) {
+            "Enero" -> iMes = 1
+            "Febrero" -> iMes = 2
+            "Marzo" -> iMes = 3
+            "Abril" -> iMes = 4
+            "Mayo" -> iMes = 5
+            "Junio" -> iMes = 6
+            "Julio" -> iMes = 7
+            "Agosto" -> iMes = 8
+            "Septiembre" -> iMes = 9
+            "Octubre" -> iMes = 10
+            "Noviembre" -> iMes = 11
+            "Diciembre" -> iMes = 12
+        }
+
+        return iMes
+    }
+
+    fun intDiasTo2Cals(strFecha2: String, strFecha1: String): Int {
+        var iDias = 0
+        val calFecha1 = calFechaFromstrFechaCorta(strFecha1)
+        val calFecha2 = calFechaFromstrFechaCorta(strFecha2)
+
+        iDias = ((calFecha2.timeInMillis - calFecha1.timeInMillis) / (1000 * 60 * 60 * 24)).toInt()
+        iDias++
+
+        return iDias
+    }
+
 }
