@@ -74,16 +74,34 @@ class Vacaciones : AppCompatActivity() {
         binding.tvFecha1.setOnClickListener {
             var calFechaDatePicker = Calendar.getInstance()
 
-            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                calFechaDatePicker = calFecha
-            }
-            else{
+            //
+            // Si el tvFecha esta vacio Fecha = Fecha s
+            //
+            if(binding.tvFecha1.text == ""){
                 calFechaDatePicker.set(
                     binding.spAno.selectedItem.toString().toInt(),
                     0,
                     1
                 )
             }
+
+            //
+            // Si tvFecha no esta vacio, Fecha = Fecha de tvFecha
+            //
+            else{
+                val iDia = binding.tvFecha1.text.toString().substring(0, 2).toInt()
+                var iMes = binding.tvFecha1.text.toString().substring(3, 5).toInt()
+                iMes--
+                val iAno = binding.tvFecha1.text.toString().substring(6, 10).toInt()
+
+                calFechaDatePicker.set(
+                    iAno,
+                    iMes,
+                    iDia
+                )
+            }
+
+
             val miDialogoCalendario1 = DatePickerDialog(
                 binding.tvFecha1.context,
                 setFechaListener1,
@@ -101,16 +119,33 @@ class Vacaciones : AppCompatActivity() {
         binding.tvFecha2.setOnClickListener {
             var calFechaDatePicker = Calendar.getInstance()
 
-            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                calFechaDatePicker = calFecha
-            }
-            else{
+            //
+            // Si el tvFecha esta vacio Fecha = Fecha s
+            //
+            if(binding.tvFecha2.text == ""){
                 calFechaDatePicker.set(
                     binding.spAno.selectedItem.toString().toInt(),
                     0,
                     1
                 )
             }
+
+            //
+            // Si tvFecha no esta vacio, Fecha = Fecha de tvFecha
+            //
+            else{
+                val iDia = binding.tvFecha2.text.toString().substring(0, 2).toInt()
+                var iMes = binding.tvFecha2.text.toString().substring(3, 5).toInt()
+                iMes--
+                val iAno = binding.tvFecha2.text.toString().substring(6, 10).toInt()
+
+                calFechaDatePicker.set(
+                    iAno,
+                    iMes,
+                    iDia
+                )
+            }
+
             val miDialogoCalendario2 = DatePickerDialog(
                 binding.tvFecha2.context,
                 setFechaListener2,
@@ -128,16 +163,33 @@ class Vacaciones : AppCompatActivity() {
         binding.ivSumar.setOnClickListener {
             var calFechaDatePicker = Calendar.getInstance()
 
-            if(calFecha.get(Calendar.YEAR) == binding.spAno.selectedItem.toString().toInt()){
-                calFechaDatePicker = calFecha
-            }
-            else{
+            //
+            // Si el tvFecha esta vacio Fecha = Fecha s
+            //
+            if(binding.tvFecha1.text == ""){
                 calFechaDatePicker.set(
                     binding.spAno.selectedItem.toString().toInt(),
                     0,
                     1
                 )
             }
+
+            //
+            // Si tvFecha no esta vacio, Fecha = Fecha de tvFecha
+            //
+            else{
+                val iDia = binding.tvFecha1.text.toString().substring(0, 2).toInt()
+                var iMes = binding.tvFecha1.text.toString().substring(3, 5).toInt()
+                iMes--
+                val iAno = binding.tvFecha1.text.toString().substring(6, 10).toInt()
+
+                calFechaDatePicker.set(
+                    iAno,
+                    iMes,
+                    iDia
+                )
+            }
+
             binding.ivEliminar.isVisible = false
             limpiaControles()
             activaControles()
@@ -160,6 +212,20 @@ class Vacaciones : AppCompatActivity() {
             //
             miDatePickerDialogo1.setOnDismissListener {
                 if (binding.tvFecha1.text != "") {
+
+                    //
+                    // Actualizamos el valor de calDatePicker
+                    //
+                    val iDia = binding.tvFecha1.text.toString().substring(0, 2).toInt()
+                    var iMes = binding.tvFecha1.text.toString().substring(3, 5).toInt()
+                    iMes--
+                    val iAno = binding.tvFecha1.text.toString().substring(6, 10).toInt()
+
+                    calFechaDatePicker.set(
+                        iAno,
+                        iMes,
+                        iDia
+                    )
 
                     //
                     // Lanzamos el calendario final de vacaciobnes
