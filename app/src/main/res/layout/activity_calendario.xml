@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backcolor"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/backcolor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://ss.chemaandroid.com/tools"
@@ -13,10 +14,12 @@
         tools:context=".ui.calendariolaboral.CalendarioLaboral">
 
         <!-- linea de spinner -->
+
         <Spinner
             android:id="@+id/spMes"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_marginTop="20dp"
             style="@style/TextosSp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -25,15 +28,17 @@
             android:id="@+id/spAno"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:layout_marginTop="20dp"
             style="@style/TextosSp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <!-- Linea de iniciales de los dias -->
+
         <TextView
             android:id="@+id/tv01"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
@@ -44,9 +49,8 @@
 
         <TextView
             android:id="@+id/tv02"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -56,9 +60,8 @@
 
         <TextView
             android:id="@+id/tv03"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -68,9 +71,8 @@
 
         <TextView
             android:id="@+id/tv04"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -80,9 +82,8 @@
 
         <TextView
             android:id="@+id/tv05"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -92,9 +93,8 @@
 
         <TextView
             android:id="@+id/tv06"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -104,9 +104,8 @@
 
         <TextView
             android:id="@+id/tv07"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             style="@style/Textos20Negrita"
             android:gravity="center"
@@ -115,10 +114,11 @@
             app:layout_constraintTop_toBottomOf="@id/spMes"/>
 
         <!-- Linea de la primera semana ...-->
+
         <TextView
             android:id="@+id/tv11"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
@@ -128,9 +128,8 @@
 
         <TextView
             android:id="@+id/tv12"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -139,9 +138,8 @@
 
         <TextView
             android:id="@+id/tv13"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -150,9 +148,8 @@
 
         <TextView
             android:id="@+id/tv14"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -161,9 +158,8 @@
 
         <TextView
             android:id="@+id/tv15"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -172,9 +168,8 @@
 
         <TextView
             android:id="@+id/tv16"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -183,9 +178,8 @@
 
         <TextView
             android:id="@+id/tv17"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
@@ -194,12 +188,12 @@
 
 
         <!-- Linea de la segunda semana ...-->
+
         <TextView
             android:id="@+id/tv21"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -207,10 +201,8 @@
 
         <TextView
             android:id="@+id/tv22"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv21"
@@ -218,10 +210,8 @@
 
         <TextView
             android:id="@+id/tv23"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv22"
@@ -229,10 +219,8 @@
 
         <TextView
             android:id="@+id/tv24"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv23"
@@ -240,10 +228,8 @@
 
         <TextView
             android:id="@+id/tv25"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv24"
@@ -251,10 +237,8 @@
 
         <TextView
             android:id="@+id/tv26"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv25"
@@ -262,10 +246,8 @@
 
         <TextView
             android:id="@+id/tv27"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv26"
@@ -275,10 +257,9 @@
         <!-- Linea de la tercera semana ...-->
         <TextView
             android:id="@+id/tv31"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -286,10 +267,8 @@
 
         <TextView
             android:id="@+id/tv32"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv31"
@@ -297,10 +276,8 @@
 
         <TextView
             android:id="@+id/tv33"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv32"
@@ -308,10 +285,8 @@
 
         <TextView
             android:id="@+id/tv34"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv33"
@@ -319,10 +294,8 @@
 
         <TextView
             android:id="@+id/tv35"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv34"
@@ -330,10 +303,8 @@
 
         <TextView
             android:id="@+id/tv36"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv35"
@@ -341,10 +312,8 @@
 
         <TextView
             android:id="@+id/tv37"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv36"
@@ -353,10 +322,9 @@
         <!-- Linea de la cuarta semana ...-->
         <TextView
             android:id="@+id/tv41"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -364,10 +332,8 @@
 
         <TextView
             android:id="@+id/tv42"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv41"
@@ -375,10 +341,8 @@
 
         <TextView
             android:id="@+id/tv43"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv42"
@@ -386,10 +350,8 @@
 
         <TextView
             android:id="@+id/tv44"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv43"
@@ -397,10 +359,8 @@
 
         <TextView
             android:id="@+id/tv45"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv44"
@@ -408,10 +368,8 @@
 
         <TextView
             android:id="@+id/tv46"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv45"
@@ -419,10 +377,8 @@
 
         <TextView
             android:id="@+id/tv47"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv46"
@@ -431,10 +387,9 @@
         <!-- Linea de la quinta semana ...-->
         <TextView
             android:id="@+id/tv51"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -442,10 +397,8 @@
 
         <TextView
             android:id="@+id/tv52"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv51"
@@ -453,10 +406,8 @@
 
         <TextView
             android:id="@+id/tv53"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv52"
@@ -464,10 +415,8 @@
 
         <TextView
             android:id="@+id/tv54"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv53"
@@ -475,10 +424,8 @@
 
         <TextView
             android:id="@+id/tv55"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv54"
@@ -486,10 +433,8 @@
 
         <TextView
             android:id="@+id/tv56"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv55"
@@ -497,10 +442,8 @@
 
         <TextView
             android:id="@+id/tv57"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv56"
@@ -509,10 +452,9 @@
         <!-- Linea de la sexta semana ...-->
         <TextView
             android:id="@+id/tv61"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
@@ -520,10 +462,8 @@
 
         <TextView
             android:id="@+id/tv62"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv61"
@@ -531,10 +471,8 @@
 
         <TextView
             android:id="@+id/tv63"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv62"
@@ -542,10 +480,8 @@
 
         <TextView
             android:id="@+id/tv64"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv63"
@@ -553,10 +489,8 @@
 
         <TextView
             android:id="@+id/tv65"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv64"
@@ -564,10 +498,8 @@
 
         <TextView
             android:id="@+id/tv66"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv65"
@@ -575,10 +507,8 @@
 
         <TextView
             android:id="@+id/tv67"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             style="@style/Textos18Negro"
             android:gravity="center"
             app:layout_constraintStart_toEndOf="@id/tv66"

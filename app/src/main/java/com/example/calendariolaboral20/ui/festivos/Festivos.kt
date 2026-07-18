@@ -5,18 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Carousel
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.calendariolaboral20.R
 import com.example.calendariolaboral20.data.models.DatosFestivos
-import com.example.calendariolaboral20.data.models.DatosVacaciones
 import com.example.calendariolaboral20.databinding.ActivityFestivosBinding
 import com.example.calendariolaboral20.domain.FuncAux
 import com.example.calendariolaboral20.domain.FuncFestivos
-import com.example.calendariolaboral20.domain.FuncVacaciones
-import com.example.calendariolaboral20.domain.FuncVacasPendientes
 import com.example.calendariolaboral20.ui.festivos.adapter.FestivosAdapter
 import java.util.Calendar
 
@@ -25,7 +24,6 @@ private var calFecha = Calendar.getInstance()
 private lateinit var miAdapter: FestivosAdapter
 
 class Festivos : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFestivosBinding.inflate(layoutInflater)
@@ -102,27 +100,16 @@ class Festivos : AppCompatActivity() {
                     ){
 
                     //
-                    // Seleccinamos la fecha del datePicker
-                    //
-                    var calFechaDatePicker = Calendar.getInstance()
-
-                    calFechaDatePicker.set(
-                        binding.spAno.selectedItem.toString().toInt(),
-                        calFecha.get(Calendar.MONTH),
-                        calFecha.get(Calendar.DAY_OF_MONTH)
-                    )
-
-                    //
                     // Lanzamos el datepicker
                     //
-                    binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFechaDatePicker)
-                    binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFechaDatePicker)
+                    binding.tvFecha.tag = FuncAux().strFechaCortaToCalendar(calFecha)
+                    binding.tvFecha.text = FuncAux().strFechaLargaFromCalendar(calFecha)
                     DatePickerDialog(
                         binding.spFestivo.context,
                         setFechaListener,
-                        calFechaDatePicker.get(Calendar.YEAR),
-                        calFechaDatePicker.get(Calendar.MONTH),
-                        calFechaDatePicker.get(Calendar.DAY_OF_MONTH)
+                        calFecha.get(Calendar.YEAR),
+                        calFecha.get(Calendar.MONTH),
+                        calFecha.get(Calendar.DAY_OF_MONTH)
                     ).show()
                     activaControles()
                 }
@@ -151,7 +138,7 @@ class Festivos : AppCompatActivity() {
                 desactivaControles()
                 binding.ivEliminar.isVisible = false
                 miAdapter.funRefrescaLista(
-                    FuncFestivos().getListaFestivosAndVacacionesAnuales(
+                    FuncFestivos().getListaFestivosAnuales(
                         binding.spAno.context,
                         binding.spAno.selectedItem.toString()
                     )
@@ -172,18 +159,14 @@ class Festivos : AppCompatActivity() {
             // Si pinchamos en tvFecha, lanzamos el dialogo de selector de fecha
             //
             if(binding.tvFecha.text != ""){
-                val iDia = binding.tvFecha.tag.toString().substring(0, 2).toInt()
-                var iMes = binding.tvFecha.tag.toString().substring(3, 5).toInt()
-                iMes--
-                val iAno = binding.tvFecha.tag.toString().substring(6, 10).toInt()
-
                 DatePickerDialog(
                     binding.tvFecha.context,
                     setFechaListener,
-                    iAno,
-                    iMes,
-                    iDia
+                    calFecha.get(Calendar.YEAR),
+                    calFecha.get(Calendar.MONTH),
+                    calFecha.get(Calendar.DAY_OF_MONTH)
                 ).show()
+
             }
         }
 
@@ -194,17 +177,21 @@ class Festivos : AppCompatActivity() {
             if(binding.tvFecha.text != "" && binding.spFestivo.selectedItem != 0){
                 guardarDatos()
             }
-            else{
-                binding.spFestivo.performClick()
-            }
         }
 
     }
 
     private fun initRv() {
 
+        val tmp = FuncFestivos().getListaFestivosAnuales(
+            this,
+            binding.spAno.selectedItem.toString()
+        )
+
+
+
         miAdapter = FestivosAdapter(
-            FuncFestivos().getListaFestivosAndVacacionesAnuales(
+            FuncFestivos().getListaFestivosAnuales(
                 this,
                 binding.spAno.selectedItem.toString()
             ),
@@ -213,33 +200,6 @@ class Festivos : AppCompatActivity() {
 
         binding.rvFestivos.layoutManager = GridLayoutManager(this, 1)
         binding.rvFestivos.adapter = miAdapter
-        scrollRv()
-    }
-
-    private fun scrollRv() {
-
-        //
-        // Esta funcion situa el primer festivo de la vista como el primero del mes corriente
-        //
-        val lista = FuncFestivos().getListaFestivosAndVacacionesAnuales(this, binding.spAno.selectedItem.toString())
-        val iMes = Calendar.getInstance().get(Calendar.MONTH)
-        var i = 0
-        var iPos = -1
-
-        while (i < lista.size){
-            var iMesLista = lista[i].strDia.substring(3, 5).toInt()
-            iMesLista --
-            if(iMes == iMesLista){
-                iPos = i
-                i = lista.size
-            }
-            i++
-        }
-
-        //
-        // Situamos el scroll en la posicion i
-        //
-        binding.rvFestivos.scrollToPosition(iPos)
     }
 
     private fun onClickLambda(datoFestivos: DatosFestivos){
@@ -340,26 +300,6 @@ class Festivos : AppCompatActivity() {
         //
         if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
 
-            //
-            // Todo Correcto borramos dato de vacaciones
-            //
-            val res = FuncVacaciones().delDatoVacaciones(
-                this,
-                DatosVacaciones(
-                    datoFestivo.strDia,
-                    datoFestivo.strDia
-                )
-            )
-            limpiaControles()
-            desactivaControles()
-            binding.ivEliminar.isVisible = false
-
-            miAdapter.funRefrescaLista(
-                FuncFestivos().getListaFestivosAndVacacionesAnuales(
-                    binding.btnGuardar.context,
-                    binding.spAno.selectedItem.toString()
-                )
-            )
         }
 
         //
@@ -392,7 +332,7 @@ class Festivos : AppCompatActivity() {
                 binding.ivEliminar.isVisible = false
 
                 miAdapter.funRefrescaLista(
-                    FuncFestivos().getListaFestivosAndVacacionesAnuales(
+                    FuncFestivos().getListaFestivosAnuales(
                         binding.btnGuardar.context,
                         binding.spAno.selectedItem.toString()
                     )
@@ -415,15 +355,9 @@ class Festivos : AppCompatActivity() {
         if(binding.spFestivo.selectedItem.toString() == "Vacaciones"){
 
             //
-            // Todo Correcto,  Llammamos setVacaciones
+            // Llammamos setVacaciones
             //
-            res = FuncVacaciones().setDatoVacaciones(
-                this,
-                DatosVacaciones(
-                    datoFestivo.strDia,
-                    datoFestivo.strDia
-                )
-            )
+
 
         }
 
@@ -471,11 +405,14 @@ class Festivos : AppCompatActivity() {
             binding.ivEliminar.isVisible = false
 
             miAdapter.funRefrescaLista(
-                FuncFestivos().getListaFestivosAndVacacionesAnuales(
+                FuncFestivos().getListaFestivosAnuales(
                     binding.btnGuardar.context,
                     binding.spAno.selectedItem.toString()
                 )
             )
+
+
+
         }
 
         //

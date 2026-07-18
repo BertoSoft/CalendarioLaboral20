@@ -23,7 +23,7 @@ class ResVacasViewHolder(view: View): RecyclerView.ViewHolder(view) {
         //
         if (datoVacaciones.strFecha1 == datoVacaciones.strFecha2) {
             str = FuncAux().strFechaLargaFromFechaCorta(datoVacaciones.strFecha1)
-            str += " -> Total 1 Día     "
+            str += " ---> 1 Día     "
             binding.tvTexto.text = str
         }
 
@@ -37,7 +37,7 @@ class ResVacasViewHolder(view: View): RecyclerView.ViewHolder(view) {
             str += datoVacaciones.strFecha1
             str += " al "
             str += datoVacaciones.strFecha2
-            str += " ---> Total  "
+            str += " --->  "
             str += iDiasLaborables
             str += "Días  "
             binding.tvTexto.text = str
